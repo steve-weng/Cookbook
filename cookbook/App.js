@@ -16,7 +16,19 @@ const InputBox = () => {
 
   const handleButtonPress = () => {
     // Handle button press, e.g., submit the input
-   fetch('http://127.0.0.1:5000/tex').then(res => res.json()).then(data => {
+   //var data1 = new FormData();
+   var data1 = {"firstParam":"thisval", "secondParam":"2ndVal"};
+    //data1.append("firstParam", "thisval");
+    //data1.append("secondParam", "12");
+   fetch('http://127.0.0.1:5000/tex', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data1),
+   })
+   .then(res => res.json()).then(data => {
      console.log(data.text);
      setText(data.text)
     });

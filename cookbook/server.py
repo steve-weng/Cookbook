@@ -22,7 +22,16 @@ def helloWorld():
 def hello():
     return render_template('main.html')
 
-@app.route('/tex', methods=['GET'])
+@app.route('/tex', methods=['POST'])
 def get_t():
-    response = jsonify({'text': 'this is a set text from the server lol'})
-    return response
+    if request.method == 'POST':
+        print("post")
+        jsonData = request.get_json()
+        print(jsonData)
+        print(jsonData['firstParam'])
+        print(jsonData['secondParam'])
+    else:
+        print("maybe a get")
+    return jsonify("success")
+    #response = jsonify({'text': request.args['text'] + 'this is a set text from the server lol'})
+    #return response
