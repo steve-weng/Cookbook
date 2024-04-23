@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, jsonify
+import sqlite3
 from flask_cors import CORS
 import requests
 import json
@@ -35,3 +36,24 @@ def get_t():
     return jsonify(success=True, data="write this lol")
     #response = jsonify({'text': request.args['text'] + 'this is a set text from the server lol'})
     #return response
+
+@app.route('/recipe', methods=['POST'])
+def storeRecipe():
+    if request.method != 'POST':
+        return jsonify(success=False, data="Not a POST request")
+        # return unsuccessful
+    # take the incoming post data, should be img, ingredients, steps, put in DB
+    # we'll add checks later to see if database already exists
+    con = sqlite3.connect("test.db")
+    cur = con.cursor()
+    cur.execute("CREATE TABLE recipe(id, image, ingredients, name, category)")
+
+    jsonData = request.get_json()
+   # img = jsonData['img']
+    ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
+    steps = jsonData['steps'] # dict (numerical:step)
+    print(ingredients)
+    print(steps)
+
+    # store in database
+    return jsonify(success=True, data="Recipe saved")

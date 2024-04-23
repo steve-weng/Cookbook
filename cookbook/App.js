@@ -9,11 +9,28 @@ const RecipeForm = () => {
 
   const handleIngredientChange = (text) => {
     setIngredient(text);
+    console.log(text)
   }
 
   const handleAddIngredient = () => {
     setIngredientList([...ingredientList, ingredient.trim()]);
     setIngredient('');
+    console.log(ingredientList)
+    console.log(ingredient)
+    var data1 = {"ingredients":ingredient, "steps":steps};
+    //data1.append("firstParam", "thisval");
+    //data1.append("secondParam", "12");
+   fetch('http://127.0.0.1:5000/recipe', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data1),
+   })
+   .then(res => res.json()).then(data => {
+     console.log(data);
+    });
   }
 
   const handleKeyPress = (event) => {
