@@ -33,5 +33,3 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-
-/__pycache__/errors*
