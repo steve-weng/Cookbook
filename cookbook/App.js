@@ -29,8 +29,8 @@ const InputBox = () => {
     body: JSON.stringify(data1),
    })
    .then(res => res.json()).then(data => {
-     console.log(data.text);
-     setText(data.text)
+     console.log(data);
+     setText(data.data)
     });
     console.log('Input submitted:', text);
   };

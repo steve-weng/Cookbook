@@ -32,6 +32,6 @@ def get_t():
         print(jsonData['secondParam'])
     else:
         print("maybe a get")
-    return jsonify(success=True, data=jsonData)
+    return jsonify(success=True, data="write this lol")
     #response = jsonify({'text': request.args['text'] + 'this is a set text from the server lol'})
     #return response
