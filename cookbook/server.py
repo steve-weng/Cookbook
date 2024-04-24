@@ -113,18 +113,23 @@ def storeRecipe():
     if request.method != 'POST':
         return jsonify(success=False, data="Not a POST request")
         # return unsuccessful
+    jsonData = request.get_json()
+   # img = jsonData['img']
+    recipe_name = jsonData['name']
+    ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
+    steps = jsonData['steps'] # dict (numerical:step)
+    print(recipe_name)
+    print(ingredients)
+    print(steps)
     # take the incoming post data, should be img, ingredients, steps, put in DB
     # we'll add checks later to see if database already exists
     con = sqlite3.connect("test.db")
     cur = con.cursor()
-    cur.execute("CREATE TABLE recipe(id, image, ingredients, name, category)")
+    
+    #cur.execute("CREATE TABLE if not exists recipes(id, image, ingredients, name, category)")
+    #cur.execute("CREATE TABLE if not exists {tn} (id, image, ingredients, name, category)".\format(tn = recipe_name)))
 
-    jsonData = request.get_json()
-   # img = jsonData['img']
-    ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
-    steps = jsonData['steps'] # dict (numerical:step)
-    print(ingredients)
-    print(steps)
+
 
     # store in database
     return jsonify(success=True, data="Recipe saved")

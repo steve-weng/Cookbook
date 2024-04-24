@@ -22,9 +22,11 @@ const Signup = ({ navigation }) => {
    })
    .then(res => res.json()).then(data => {
      console.log(data);
+     if (data.success == true){
+      navigation.navigate('Home');
+    }
     });
     // After successful sign up, navigate back to login page
-    //navigation.navigate('Login');
   };
 
   return (
