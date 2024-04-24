@@ -35,6 +35,10 @@ const Login = ({ navigation }) => {
     navigation.navigate('Signup');
   };
 
+  const redirectHome = () => {
+    navigation.navigate('Home');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -65,7 +69,10 @@ const Login = ({ navigation }) => {
           <Text style={styles.signupText}>Sign up</Text>
         </TouchableOpacity>
       </View>
+      {/* // temporary button */}
+      <Button title="Go to home" onPress={redirectHome} /> 
     </View>
+    
   );
 };
 

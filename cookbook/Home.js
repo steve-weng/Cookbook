@@ -16,6 +16,10 @@ const Home = ({ navigation }) => {
     navigation.navigate('Login');
   }
 
+  const redirectAdd = () => {
+    navigation.navigate('Add');
+  }
+
   const handleAddIngredient = () => {
     setIngredientList([...ingredientList, ingredient.trim()]);
     setIngredient('');
@@ -78,30 +82,12 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={{ padding: 20 }}>
-    <View style={{flexDirection: 'row'}}>
-      <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
-        onChangeText={handleIngredientChange}
-        onKeyPress={handleKeyPress}
-        value={ingredient}
-        placeholder="Enter ingredient"
-      />
-      <TouchableOpacity onPress={handleAddIngredient}>
-        <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
-      </TouchableOpacity>
-
-      <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
-        onChangeText={handleStepsChange}
-        value={steps}
-        placeholder="Enter steps"
-      />
-      </View>
       <View style={{ marginTop: 10 }}>
         {ingredientList.map((item, index) => (
           <Text key={index}>{item}</Text>
         ))}
       </View>
+      <Button title="Add recipe" onPress={redirectAdd} />
       <Button title="Logout" onPress={handleLogout} />
     </View>
   );
