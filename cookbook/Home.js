@@ -26,8 +26,6 @@ const Home = ({ navigation }) => {
     console.log(ingredientList)
     console.log(ingredient)
     var data1 = {"ingredients":ingredient, "steps":steps};
-    //data1.append("firstParam", "thisval");
-    //data1.append("secondParam", "12");
    fetch('http://127.0.0.1:5000/recipe', {
     method: 'POST',
     headers: {

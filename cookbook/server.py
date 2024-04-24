@@ -60,8 +60,8 @@ def login():
     return jsonify(success=False, data="Not even a post request")
 
 # registers the given user
-@app.route('/register', methods=['GET', 'POST'])
-def register():
+@app.route('/signup', methods=['POST'])
+def signup():
     if request.method == 'POST':
         jsonData = request.get_json()
         username = jsonData['username']
@@ -71,8 +71,11 @@ def register():
         hashed_password = bcrypt.generate_password_hash(
             password).decode('utf-8')
         new_user = User(username=username, password=hashed_password)
+        print("about to add")
         db.session.add(new_user)
+        print("added")
         db.session.commit()
+        print("commit")
         return jsonify(success=True, data="Successfully Registered User")
         #return redirect(url_for('login'))
 
