@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import Header from './Header';
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { width, height } = Dimensions.get('window');
 
   const handleLogin = () => {
     // login code here
@@ -34,7 +37,10 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
+      <View style={styles.header}>
+        <Header />
+      </View>
+      <Text style={[styles.welcomeText, {fontSize: width * 0.03}]}>Welcome!</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -48,8 +54,16 @@ const Login = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Login" onPress={handleLogin} />
-      <Button title="Signup" onPress={redirectSignup} />
+      <View style={styles.loginButton}>
+        <TouchableOpacity style={styles.customButton} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.loginButton}>
+        <TouchableOpacity style={styles.customButton} onPress={redirectSignup}>
+          <Text style={styles.buttonText}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -60,6 +74,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  header: {
+    position: 'absolute',
+    alignitems:'center',
+    top: "16%",
+  },
+  welcomeText: {
+    lineHeight: "35px",
+    fontWeight: "600",
+    textAlign: "center",
+    fontFamily: "Markazi Text, serif",
+    paddingBottom: "20px",
+  },
   input: {
     borderWidth: 1,
     borderColor: 'gray',
@@ -67,6 +93,26 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     width: 200,
+  },
+  loginButton: {
+    width: 200, // make this flexible
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  customButton: {
+    backgroundColor: "#FFA800",
+    width: 200, // make this flexible
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18, // make this flexible
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: "Markazi Text, serif",
   },
 });
 
