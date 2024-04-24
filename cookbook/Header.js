@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
       flexDirection: "column",
       justifyContent: "center",
       color: "rgba(0,0,0,1)",
-      fontSize: "35px",
-      lineHeight: "35px",
-      fontFamily: "Markazi Text, serif",
-      fontWeight: "600",
+      fontSize: 35,
+      lineHeight: 35,
+      fontFamily: "Playfair Display",
+      fontWeight: 900,
       textAlign: "center",
-      paddingLeft: "10px",
+      paddingLeft: 10,
     },
 });
 

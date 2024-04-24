@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
     top: "16%",
   },
   registerText: {
-    lineHeight: "35px",
-    fontWeight: "600",
+    lineHeight: 35,
+    fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Markazi Text, serif",
-    paddingBottom: "20px",
+    fontFamily: "Playfair Display",
+    paddingBottom: 20,
   },
   input: {
     borderWidth: 1,
@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
   signupText: {
     color: 'white',
     fontSize: 18, // make this flexible
-    fontWeight: 'bold',
+    fontWeight: 800,
     textAlign: 'center',
-    fontFamily: "Markazi Text, serif",
+    fontFamily: "Playfair Display",
   },
 });
 

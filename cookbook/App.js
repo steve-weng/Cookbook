@@ -1,6 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import "@fontsource/playfair-display"; // Defaults to weight 400
+// import "@fontsource/playfair-display/400.css"; // Specify weight
+// import "@fontsource/playfair-display/400-italic.css"; // Specify weight and style
 import Login from './Login';
 import Signup from './Signup';
 import Home from './Home';
