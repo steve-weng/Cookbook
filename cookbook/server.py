@@ -71,16 +71,11 @@ def signup():
         hashed_password = bcrypt.generate_password_hash(
             password).decode('utf-8')
         new_user = User(username=username, password=hashed_password)
-        print("about to add")
         db.session.add(new_user)
-        print("added")
         db.session.commit()
-        print("commit")
         return jsonify(success=True, data="Successfully Registered User")
-        #return redirect(url_for('login'))
 
     return jsonify(success=False, data="Failed to register")
-    #return render_template('registeration.html')
 
 
 @app.route('/logout')

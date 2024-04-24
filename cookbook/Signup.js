@@ -21,7 +21,7 @@ const Signup = ({ navigation }) => {
      console.log(data);
     });
     // After successful sign up, navigate back to login page
-    navigation.navigate('Login');
+    //navigation.navigate('Login');
   };
 
   return (

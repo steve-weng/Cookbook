@@ -7,10 +7,25 @@ const Login = ({ navigation }) => {
 
   const handleLogin = () => {
     // login code here
-    navigation.navigate('Home');
-    // console.log('Username:', username);
-    // console.log('Password:', password);
-    
+    var sendData = {"username":username, "password":password};
+   fetch('http://127.0.0.1:5000/login', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(sendData),
+   })
+   .then(res => res.json()).then(data => {
+     console.log(data);
+     if (data.success == true){
+      navigation.navigate('Home');
+    }
+    else {
+      console.log("failed logged in")
+    }
+    });
+
   };
 
   const redirectSignup = () => {
