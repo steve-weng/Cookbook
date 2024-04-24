@@ -71,9 +71,14 @@ def signup():
         hashed_password = bcrypt.generate_password_hash(
             password).decode('utf-8')
         new_user = User(username=username, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return jsonify(success=True, data="Successfully Registered User")
+        # check if username is already in database
+        exists = db.session.query(User.username).filter_by(username=username)
+        if exists.first() is None: # user does not exist
+            db.session.add(new_user)
+            db.session.commit()
+            return jsonify(success=True, data="Successfully Registered User")
+        else:
+            return jsonify(success=False, data="Failed to register, username taken")
 
     return jsonify(success=False, data="Failed to register")
 
