@@ -8,6 +8,10 @@ const Signup = ({ navigation }) => {
 
   const { width, height } = Dimensions.get('window');
 
+  const redirectLogin = () => {
+    navigation.navigate('Login');
+  }
+
   const handleSignup = () => {
     // Your sign up logic here
     var data = {"username":username, "password":password};
@@ -51,6 +55,11 @@ const Signup = ({ navigation }) => {
       <View style={styles.signupButton}>
         <TouchableOpacity style={styles.button} onPress={handleSignup}>
           <Text style={styles.signupText}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.signupButton}>
+        <TouchableOpacity style={styles.button} onPress={handleSignup}>
+          <Text style={styles.signupText} onPress={redirectLogin}>Back to login</Text>
         </TouchableOpacity>
       </View>
     </View>

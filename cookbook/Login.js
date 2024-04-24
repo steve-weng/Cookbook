@@ -54,14 +54,15 @@ const Login = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <View style={styles.loginButton}>
-        <TouchableOpacity style={styles.customButton} onPress={handleLogin}>
+      <View style={styles.loginContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.loginButton}>
-        <TouchableOpacity style={styles.customButton} onPress={redirectSignup}>
-          <Text style={styles.buttonText}>Sign up</Text>
+      <View style={styles.signupContainer}>
+        <Text>Don't have an account? </Text>
+        <TouchableOpacity onPress={redirectSignup}>
+          <Text style={styles.signupText}>Sign up</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -94,12 +95,12 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 200,
   },
-  loginButton: {
+  loginContainer: {
     width: 200, // make this flexible
     paddingTop: 10,
     paddingBottom: 10,
   },
-  customButton: {
+  button: {
     backgroundColor: "#FFA800",
     width: 200, // make this flexible
     height: 30,
@@ -113,6 +114,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     fontFamily: "Playfair Display",
+  },
+  signupContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  signupText: {
+    textDecorationLine: 'underline',
   },
 });
 
