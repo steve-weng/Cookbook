@@ -130,7 +130,7 @@ def storeRecipe():
     from PIL import Image
 
     imageFile = Image.open(img)    
-    imageFile.show()
+    #imageFile.show()
 
     #print(recipe_name)
     #print(ingredients)
