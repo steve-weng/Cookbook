@@ -121,18 +121,36 @@ def storeRecipe():
     jsonData = request.get_json()
     recipe_name = jsonData['recipeName']
     ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
+    # parse list of ingredients to string
+    if ingredients is not None:
+        ingredientList = str(ingredients[0])
+        for i in range(1, len(ingredients)):
+            ingredientList = ingredientList + "," + ingredients[i]
+    
     steps = jsonData['steps'] # dict (numerical:step)
     img = jsonData['img']
     print(recipe_name)
-    print(ingredients)
+    print(ingredientList)
     print(steps)
     # take the incoming post data, should be img, ingredients, steps, put in DB
     # we'll add checks later to see if database already exists
-    con = sqlite3.connect("test.db")
+    con = sqlite3.connect("test1.db")
     cur = con.cursor()
     
-    #cur.execute("CREATE TABLE if not exists recipes(id, image, ingredients, name, category)")
-    #cur.execute("CREATE TABLE if not exists {tn} (id, image, ingredients, name, category)".\format(tn = recipe_name)))
+    cur.execute("CREATE TABLE if not exists Recipes(itemID integer primary key, name, ingredients, steps, img)")
+    cur.execute("CREATE TABLE if not exists Tags (tagID integer primary key, tagTitle)")
+    cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
+
+    cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredientList, steps, img))
+
+    for row in cur.execute("SELECT * FROM Recipes"):
+ 	    print(row)
+    #for row in cur.execute("SELECT * FROM Tags"):
+ 	#    print(row)
+    #for row in cur.execute("SELECT * FROM ItemTags"):
+ 	#    print(row)
+    # if tag does not exist in table Tags
+    # insert the new tag at the end with increasing ID
 
     # store in database
     return jsonify(success=True, data="Recipe saved")
