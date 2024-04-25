@@ -5,6 +5,8 @@ const Add = ({ navigation }) => {
   const [name, setName] = useState('');
   const [ingredient, setIngredient] = useState('');
   const [ingredientList, setIngredientList] = useState([]);
+  const [tag, setTag] = useState('');
+  const [tagList, setTagList] = useState([]);
   const [steps, setSteps] = useState('');
   const [image, setImage] = useState(null);
 
@@ -28,6 +30,22 @@ const Add = ({ navigation }) => {
   const handleAddIngredient = () => {
     setIngredientList([...ingredientList, ingredient]);
     setIngredient('');
+  }
+
+  // Tags
+  const handleTagChange = (text) => {
+    setTag(text);
+  }
+
+  const handleKeyPressTag = (event) => {
+    if (event.nativeEvent.key === 'Enter') {
+      handleAddTag();
+    }
+  }
+
+  const handleAddTag = () => {
+    setTagList([...tagList, tag]);
+    setTag('');
   }
 
   // Steps
@@ -93,6 +111,16 @@ const Add = ({ navigation }) => {
             <TouchableOpacity onPress={handleAddIngredient}>
                 <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
+            <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
+                onChangeText={handleTagChange}
+                onKeyPress={handleKeyPressTag}
+                value={tag}
+                placeholder="Enter tag"
+            />
+            <TouchableOpacity onPress={handleAddTag}>
+                <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
+            </TouchableOpacity>
 
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
@@ -103,8 +131,13 @@ const Add = ({ navigation }) => {
             <input type="file" onChange={handleImageChange} />
             <Button onPress={handleSubmit} title="Submit" />
         </View>
-        <View style={{ marginTop: 10 }}>
+        <View style={{ marginTop: 10, marginLeft: 200 }}>
             {ingredientList.map((item, index) => (
+            <Text key={index}>{item}</Text>
+        ))}
+        </View>
+        <View style={{ marginTop: 10, alignItems: 'center' }}>
+            {tagList.map((item, index) => (
             <Text key={index}>{item}</Text>
         ))}
         </View>
