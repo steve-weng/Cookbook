@@ -75,17 +75,31 @@ const Add = ({ navigation }) => {
     "recipeName":name,
     "ingredients":ingredientList,
     "steps":steps,
-    "img":image
+    "img":JSON.stringify(image)
     };
+
+    var formData = new FormData();
+    formData.append("recipeName", name);
+    formData.append("ingredients", ingredientList);
+    formData.append("steps", steps);
+    formData.append("img", image);
+
+
+    console.log(formData.get("recipeName"));
+    //recipeData = JSON.stringify(recipeData);
+    //console.log(typeof(recipeData));
+    //console.log(recipeData);
+    //recipeData.img = image;
   
-   console.log(image)
    fetch('http://127.0.0.1:5000/recipe', {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Accept': 'application/json'
+      //'Content-Type': 'application/json'
     },
-    body: JSON.stringify(recipeData),
+    body: formData,
+    //body: image,
+   // body: JSON.stringify(recipeData),
    })
    .then(res => res.json()).then(data => {
      console.log(data);

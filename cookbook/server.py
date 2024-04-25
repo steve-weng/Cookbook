@@ -118,9 +118,9 @@ def storeRecipe():
     if request.method != 'POST':
         return jsonify(success=False, data="Not a POST request")
         # return unsuccessful
-    jsonData = request.get_json()
-    recipe_name = jsonData['recipeName']
-    ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
+
+    recipe_name = request.form['recipeName']
+    ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
     # parse list of ingredients to string
     if len(ingredients) > 0:
         ingredientList = str(ingredients[0])
@@ -129,9 +129,16 @@ def storeRecipe():
     else:
         ingredientList = ""
     
-    steps = jsonData['steps'] # dict (numerical:step)
-    img = jsonData['img']
-    print(img)
+    steps = request.form['steps'] # dict (numerical:step)
+    img = request.files['img']
+
+    from PIL import Image
+
+    imageFile = Image.open(img)    
+    imageFile.show()
+    #img = jsonData['img']
+    #print(img)
+    #print(type(img))
     #print(recipe_name)
     #print(ingredientList)
     #print(steps)
