@@ -121,13 +121,8 @@ def storeRecipe():
 
     recipe_name = request.form['recipeName']
     ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
-    # parse list of ingredients to string
-    if len(ingredients) > 0:
-        ingredientList = str(ingredients[0])
-        for i in range(1, len(ingredients)):
-            ingredientList = ingredientList + "," + ingredients[i]
-    else:
-        ingredientList = ""
+    #print(type(ingredients))
+    #print(ingredients)
     
     steps = request.form['steps'] # dict (numerical:step)
     img = request.files['img']
@@ -136,12 +131,11 @@ def storeRecipe():
 
     imageFile = Image.open(img)    
     imageFile.show()
-    #img = jsonData['img']
-    #print(img)
-    #print(type(img))
+
     #print(recipe_name)
-    #print(ingredientList)
+    #print(ingredients)
     #print(steps)
+
     # take the incoming post data, should be img, ingredients, steps, put in DB
     # we'll add checks later to see if database already exists
     #con = sqlite3.connect("test1.db")
@@ -153,7 +147,7 @@ def storeRecipe():
         cur.execute("CREATE TABLE if not exists Tags (tagID integer primary key, tagTitle)")
         cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
 
-        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredientList, steps, img))
+        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredients, steps, img))
 
         recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
