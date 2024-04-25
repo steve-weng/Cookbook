@@ -119,10 +119,10 @@ def storeRecipe():
         return jsonify(success=False, data="Not a POST request")
         # return unsuccessful
     jsonData = request.get_json()
-   # img = jsonData['img']
-    recipe_name = jsonData['name']
+    recipe_name = jsonData['recipeName']
     ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
     steps = jsonData['steps'] # dict (numerical:step)
+    img = jsonData['img']
     print(recipe_name)
     print(ingredients)
     print(steps)
@@ -133,8 +133,6 @@ def storeRecipe():
     
     #cur.execute("CREATE TABLE if not exists recipes(id, image, ingredients, name, category)")
     #cur.execute("CREATE TABLE if not exists {tn} (id, image, ingredients, name, category)".\format(tn = recipe_name)))
-
-
 
     # store in database
     return jsonify(success=True, data="Recipe saved")

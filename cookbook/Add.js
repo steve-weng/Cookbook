@@ -29,24 +29,12 @@ const Add = ({ navigation }) => {
   const handleAddIngredient = () => {
     setIngredientList([...ingredientList, ingredient.trim()]);
     setIngredient('');
+    console.log(ingredientList)
+    console.log(ingredient)
     // keeps cursor in text box
     if (ingredientInputRef.current) {
       ingredientInputRef.current.focus();
     }
-    console.log(ingredientList)
-    console.log(ingredient)
-    var data1 = {"ingredients":ingredient, "steps":steps};
-   fetch('http://127.0.0.1:5000/recipe', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data1),
-   })
-   .then(res => res.json()).then(data => {
-     console.log(data);
-    });
   }
 
   // Steps
@@ -65,12 +53,6 @@ const Add = ({ navigation }) => {
     //console.log("Image uploaded:", image);
   }
   
-  //useEffect(() => {
-   // fetch('/tex').then(res => res.json()).then(data => {
-    //  setText(data.text);
-    //});
-  //}, []);
-
 
   // this function runs when you press submit
   // function should store recipe name, steps, and image 
@@ -79,23 +61,26 @@ const Add = ({ navigation }) => {
   // i think the ingredients are already added somehwere? each time you press the plus sign
   const handleSubmit = () => {
     // Handle button press, e.g., submit the input
-   //var data1 = new FormData();
-   var data1 = {"firstParam":"thisval", "secondParam":"2ndVal"};
-    //data1.append("firstParam", "thisval");
-    //data1.append("secondParam", "12");
-   fetch('http://127.0.0.1:5000/tex', {
+
+    var recipeData = {
+    "recipeName":name,
+    "ingredients":ingredientList,
+    "steps":steps,
+    "img":image
+    };
+
+   console.log(ingredientList)
+   fetch('http://127.0.0.1:5000/recipe', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data1),
+    body: JSON.stringify(recipeData),
    })
    .then(res => res.json()).then(data => {
      console.log(data);
-     setText(data.data)
     });
-    console.log('Input submitted:', text);
   };
 
   return (
