@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
 
 const Add = ({ navigation }) => {
-  // react states for ingredients and steps
   const [name, setName] = useState('');
   const [ingredient, setIngredient] = useState('');
   const [ingredientList, setIngredientList] = useState([]);
@@ -27,14 +26,8 @@ const Add = ({ navigation }) => {
   }
 
   const handleAddIngredient = () => {
-    setIngredientList([...ingredientList, ingredient.trim()]);
+    setIngredientList([...ingredientList, ingredient]);
     setIngredient('');
-    console.log(ingredientList)
-    console.log(ingredient)
-    // keeps cursor in text box
-    if (ingredientInputRef.current) {
-      ingredientInputRef.current.focus();
-    }
   }
 
   // Steps
@@ -52,13 +45,11 @@ const Add = ({ navigation }) => {
     // Handle image upload logic here
     //console.log("Image uploaded:", image);
   }
-  
 
   // this function runs when you press submit
-  // function should store recipe name, steps, and image 
+  // function should store recipe name, ingredients, steps, and image 
   // because they havent been stored anywhere yet
   // => accessible through state variables at top
-  // i think the ingredients are already added somehwere? each time you press the plus sign
   const handleSubmit = () => {
     // Handle button press, e.g., submit the input
 
