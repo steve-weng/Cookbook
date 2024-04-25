@@ -145,8 +145,12 @@ def storeRecipe():
 
         cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredientList, steps, img))
 
+        recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
-            print(row)
+        #    print(row)
+         #   recipeList.append(row)
+
+        #print(recipeList)
         #for row in cur.execute("SELECT * FROM Tags"):
         #    print(row)
         #for row in cur.execute("SELECT * FROM ItemTags"):
@@ -154,8 +158,8 @@ def storeRecipe():
         # if tag does not exist in table Tags
         # insert the new tag at the end with increasing ID
 
-    # store in database
-    return jsonify(success=True, data="Recipe saved")
+    # returns all recipes as an array of objects to front end
+    return jsonify(success=True, data=recipeList)
 
 
 if __name__ == "__main__":
