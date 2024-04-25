@@ -122,16 +122,19 @@ def storeRecipe():
     recipe_name = jsonData['recipeName']
     ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
     # parse list of ingredients to string
-    if ingredients is not None:
+    if len(ingredients) > 0:
         ingredientList = str(ingredients[0])
         for i in range(1, len(ingredients)):
             ingredientList = ingredientList + "," + ingredients[i]
+    else:
+        ingredientList = ""
     
     steps = jsonData['steps'] # dict (numerical:step)
     img = jsonData['img']
-    print(recipe_name)
-    print(ingredientList)
-    print(steps)
+    print(img)
+    #print(recipe_name)
+    #print(ingredientList)
+    #print(steps)
     # take the incoming post data, should be img, ingredients, steps, put in DB
     # we'll add checks later to see if database already exists
     #con = sqlite3.connect("test1.db")
@@ -148,7 +151,7 @@ def storeRecipe():
         recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
         #    print(row)
-         #   recipeList.append(row)
+            recipeList.append(row)
 
         #print(recipeList)
         #for row in cur.execute("SELECT * FROM Tags"):
