@@ -134,23 +134,25 @@ def storeRecipe():
     print(steps)
     # take the incoming post data, should be img, ingredients, steps, put in DB
     # we'll add checks later to see if database already exists
-    con = sqlite3.connect("test1.db")
-    cur = con.cursor()
+    #con = sqlite3.connect("test1.db")
+    #cur = con.cursor()
     
-    cur.execute("CREATE TABLE if not exists Recipes(itemID integer primary key, name, ingredients, steps, img)")
-    cur.execute("CREATE TABLE if not exists Tags (tagID integer primary key, tagTitle)")
-    cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
+    with sqlite3.connect("test2.db") as con:
+        cur = con.cursor()
+        cur.execute("CREATE TABLE if not exists Recipes(itemID integer primary key, name, ingredients, steps, img)")
+        cur.execute("CREATE TABLE if not exists Tags (tagID integer primary key, tagTitle)")
+        cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
 
-    cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredientList, steps, img))
+        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredientList, steps, img))
 
-    for row in cur.execute("SELECT * FROM Recipes"):
- 	    print(row)
-    #for row in cur.execute("SELECT * FROM Tags"):
- 	#    print(row)
-    #for row in cur.execute("SELECT * FROM ItemTags"):
- 	#    print(row)
-    # if tag does not exist in table Tags
-    # insert the new tag at the end with increasing ID
+        for row in cur.execute("SELECT * FROM Recipes"):
+            print(row)
+        #for row in cur.execute("SELECT * FROM Tags"):
+        #    print(row)
+        #for row in cur.execute("SELECT * FROM ItemTags"):
+        #    print(row)
+        # if tag does not exist in table Tags
+        # insert the new tag at the end with increasing ID
 
     # store in database
     return jsonify(success=True, data="Recipe saved")
