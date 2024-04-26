@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
 import Header from './Header';
+import MyButton from './MyButton';
 
 const Add = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -72,12 +73,18 @@ const Add = ({ navigation }) => {
   const handleSubmit = () => {
     // Handle button press, e.g., submit the input
 
+    var recipeData = {
+    "recipeName":name,
+    "ingredients":ingredientList,
+    "steps":steps,
+    "img":JSON.stringify(image)
+    };
+
     var formData = new FormData();
     formData.append("recipeName", name);
     formData.append("ingredients", ingredientList);
     formData.append("steps", steps);
     formData.append("img", image);
-    formData.append("tags", tagList);
 
 
     console.log(formData.get("recipeName"));
@@ -102,14 +109,23 @@ const Add = ({ navigation }) => {
   };
 
   return (
-    <View style={{ padding: 20 }}>
-        <View style={{flexDirection: 'row'}}>
+
+      <View style={{ alignItems: 'center'}}>
+        <View style={{paddingTop: 60, paddingBottom:50}}>
+          <Header />
+        </View>
+      
+        <View style={{flexDirection: 'column'}}>
+        <Text style={{paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Recipe Name</Text>
             <TextInput 
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
+                style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
                 onChangeText={handleNameChange}
                 value={name}
                 placeholder="Enter recipe name"
             />
+
+            <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Ingredients</Text>
+            <View style={{flexDirection: 'row'}}>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
                 onChangeText={handleIngredientChange}
@@ -118,8 +134,12 @@ const Add = ({ navigation }) => {
                 placeholder="Enter ingredient"
             />
             <TouchableOpacity onPress={handleAddIngredient}>
-                <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
+                <Text style={{ color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
+            </View>
+
+            <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Tags</Text>
+            <View style={{flexDirection: 'row'}}>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
                 onChangeText={handleTagChange}
@@ -128,17 +148,21 @@ const Add = ({ navigation }) => {
                 placeholder="Enter tag"
             />
             <TouchableOpacity onPress={handleAddTag}>
-                <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
+                <Text style={{ color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
+            </View>
 
+            <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Steps</Text>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
                 onChangeText={handleStepsChange}
                 value={steps}
                 placeholder="Enter steps"
             />
-            <input type="file" onChange={handleImageChange} />
-            <Button onPress={handleSubmit} title="Submit" />
+            <input style={{paddingBottom: 20}} type="file" onChange={handleImageChange} />
+            <View style={{alignItems: 'center'}}>
+            <MyButton width={200} title="Submit" onPressFunction={handleSubmit} />
+            </View>
         </View>
         <View style={{ marginTop: 10, marginLeft: 200 }}>
             {ingredientList.map((item, index) => (
@@ -150,7 +174,8 @@ const Add = ({ navigation }) => {
             <Text key={index}>{item}</Text>
         ))}
         </View>
-    </View>
+        </View>
+
   );
 };
 
