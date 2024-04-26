@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
+import Header from './Header';
 
 const Add = ({ navigation }) => {
   const [name, setName] = useState('');

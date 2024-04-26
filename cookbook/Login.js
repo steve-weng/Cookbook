@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Header from './Header';
+import MyButton from './MyButton';
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -60,10 +61,10 @@ const Login = ({ navigation }) => {
         onChangeText={setPassword}
       />
       <View style={styles.loginContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        <MyButton title="Log In" onPressFunction={handleLogin}/>
       </View>
+
+      
       <View style={styles.signupContainer}>
         <Text>Don't have an account? </Text>
         <TouchableOpacity onPress={redirectSignup}>
@@ -106,22 +107,8 @@ const styles = StyleSheet.create({
   loginContainer: {
     width: 200, // make this flexible
     paddingTop: 10,
-    paddingBottom: 10,
-  },
-  button: {
-    backgroundColor: "#FFA800",
-    width: 200, // make this flexible
-    height: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18, // make this flexible
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontFamily: "Playfair Display",
+    paddingBottom: 3,
+    alignItems: 'center',
   },
   signupContainer: {
     flexDirection: 'row',
