@@ -108,7 +108,6 @@ def storeRecipe():
     img = request.files['img']
     tags = request.form['tags']
     tagList = tags.split(",")
-    print(tagList)
 
     from dotenv import load_dotenv
     load_dotenv()
@@ -163,12 +162,12 @@ def storeRecipe():
             cur.execute("INSERT INTO ItemTags VALUES (?, ?)", (itemID, tagID))
 
         # debug print statements
-        for row in cur.execute("SELECT * FROM Recipes"):
-            print(row)
-        for row in cur.execute("SELECT * FROM Tags"):
-            print(row)
-        for row in cur.execute("SELECT * FROM ItemTags"):
-            print(row)
+        #for row in cur.execute("SELECT * FROM Recipes"):
+        #    print(row)
+        #for row in cur.execute("SELECT * FROM Tags"):
+        #    print(row)
+        #for row in cur.execute("SELECT * FROM ItemTags"):
+        #    print(row)
 
     # returns all recipes as an array of objects to front end
     return jsonify(success=True, data=recipeList)
