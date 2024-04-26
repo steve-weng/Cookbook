@@ -134,8 +134,11 @@ def storeRecipe():
         cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
 
         # insert recipe
-        ### later add a functionality to ensure recipe name is not a duplicate
-        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredients, steps, imgURL))
+        c = cur.execute("SELECT * FROM Recipes WHERE name = ?", (recipe_name,))
+        if (c.fetchone() is None): # if the recipe name doesn't exist, insert it
+            cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredients, steps, imgURL))
+        else:
+            return jsonify(success=False, data="Recipe name already exists")
 
         # add tag if it doesn't exist
         for t in tagList:
@@ -149,7 +152,7 @@ def storeRecipe():
             recipeList.append(row)
 
         # match itemID to tagID
-        # presumably, the current item ID is unique and new (will have to add a filter for unique recipe name)
+        # the current item ID is unique and new
         # so we can simply add the item ID in first column, then each tag in 2nd column iterating
         res = cur.execute("SELECT COUNT(1) from Recipes") # gets num of rows which is current itemID
         itemID = res.fetchone()[0]
