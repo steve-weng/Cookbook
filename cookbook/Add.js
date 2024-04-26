@@ -66,6 +66,11 @@ const Add = ({ navigation }) => {
     //console.log("Image uploaded:", image);
   }
 
+  // Redirection
+  const redirectHome = () => {
+    navigation.navigate('Home');
+  }
+
   // this function runs when you press submit
   // function should store recipe name, ingredients, steps, and image 
   // because they havent been stored anywhere yet
@@ -163,6 +168,11 @@ const Add = ({ navigation }) => {
             <View style={{alignItems: 'center'}}>
             <MyButton width={200} title="Submit" onPressFunction={handleSubmit} />
             </View>
+
+            <View style={{alignItems: 'center', paddingTop: 10}}>
+            <MyButton width={200} title="Back" onPressFunction={redirectHome} />
+            </View>
+
         </View>
         <View style={{ marginTop: 10, marginLeft: 200 }}>
             {ingredientList.map((item, index) => (
