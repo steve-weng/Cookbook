@@ -7,7 +7,8 @@ from flask_bcrypt import Bcrypt
 
 import sqlite3
 from flask_cors import CORS
-
+import requests
+import json
 app = Flask(__name__)
 CORS(app)
 
@@ -25,6 +26,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    # is_active = db.Column(db.Boolean(), default=True)
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -97,6 +99,20 @@ def helloWorld():
 def hello():
     return render_template('main.html')
 
+@app.route('/tex', methods=['POST'])
+def get_t():
+    if request.method == 'POST':
+        print("post")
+        jsonData = request.get_json()
+        print(jsonData)
+        print(jsonData['firstParam'])
+        print(jsonData['secondParam'])
+    else:
+        print("maybe a get")
+    return jsonify(success=True, data="write this lol")
+    #response = jsonify({'text': request.args['text'] + 'this is a set text from the server lol'})
+    #return response
+
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
     if request.method != 'POST':
@@ -105,6 +121,8 @@ def storeRecipe():
 
     recipe_name = request.form['recipeName']
     ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
+    #print(type(ingredients))
+    #print(ingredients)
     
     steps = request.form['steps'] # dict (numerical:step)
     img = request.files['img']
@@ -125,8 +143,19 @@ def storeRecipe():
     #upload image to cloudinary, build a URL to save to DB
     cloudinary.uploader.upload(img, public_id=recipe_name) # recipe names should be unique
     imgURL = CloudinaryImage(recipe_name).build_url()
+    #print(imgURL)
+
+    #imageFile = Image.open(img)    
+    #imageFile.show()
+
+    #print(recipe_name)
+    #print(ingredients)
+    #print(steps)
 
     # take the incoming post data, should be img, ingredients, steps, put in DB
+    # we'll add checks later to see if database already exists
+    #con = sqlite3.connect("test1.db")
+    #cur = con.cursor()
     
     with sqlite3.connect("test1.db") as con:
         cur = con.cursor()

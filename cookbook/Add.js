@@ -78,13 +78,23 @@ const Add = ({ navigation }) => {
     formData.append("steps", steps);
     formData.append("img", image);
     formData.append("tags", tagList);
+
+
+    console.log(formData.get("recipeName"));
+    //recipeData = JSON.stringify(recipeData);
+    //console.log(typeof(recipeData));
+    //console.log(recipeData);
+    //recipeData.img = image;
   
    fetch('http://127.0.0.1:5000/recipe', {
     method: 'POST',
     headers: {
       'Accept': 'application/json'
+      //'Content-Type': 'application/json'
     },
     body: formData,
+    //body: image,
+   // body: JSON.stringify(recipeData),
    })
    .then(res => res.json()).then(data => {
      console.log(data);
