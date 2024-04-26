@@ -104,7 +104,6 @@ def storeRecipe():
 
     recipe_name = request.form['recipeName']
     ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
-    
     steps = request.form['steps'] # dict (numerical:step)
     img = request.files['img']
     tags = request.form['tags']
@@ -125,27 +124,35 @@ def storeRecipe():
     cloudinary.uploader.upload(img, public_id=recipe_name) # recipe names should be unique
     imgURL = CloudinaryImage(recipe_name).build_url()
 
-    # take the incoming post data, should be img, ingredients, steps, put in DB
-
-    with sqlite3.connect("test1.db") as con:
+    # take the incoming post data, should qwbe img, ingredients, steps, put in DB
+    with sqlite3.connect("test5.db") as con:
         cur = con.cursor()
+
+        # create the tables if they don't exist
         cur.execute("CREATE TABLE if not exists Recipes(itemID integer primary key, name, ingredients, steps, imgURL)")
         cur.execute("CREATE TABLE if not exists Tags (tagID integer primary key, tagTitle)")
         cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
 
+        # insert recipe
+        ### later add a functionality to ensure recipe name is not a duplicate
         cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredients, steps, imgURL))
 
-        recipeList = []
+        # add tag if it doesn't exist
+        for t in tagList:
+            c = cur.execute("SELECT * FROM Tags WHERE tagTitle = ?", (t,))
+            if (c.fetchone() is None): # if the tag doesn't exist, insert it
+                cur.execute("INSERT INTO Tags VALUES (NULL, ?)", (t,))
+
+        recipeList = [] 
         for row in cur.execute("SELECT * FROM Recipes"):
         #    print(row)
             recipeList.append(row)
 
-        #print(recipeList)
-        #for row in cur.execute("SELECT * FROM Tags"):
-        #    print(row)
-        #for row in cur.execute("SELECT * FROM ItemTags"):
-        #    print(row)
-        # if tag does not exist in table Tags
+        for row in cur.execute("SELECT * FROM Tags"):
+            print(row)
+        for row in cur.execute("SELECT * FROM ItemTags"):
+            print(row)
+         #if tag does not exist in table Tags
         # insert the new tag at the end with increasing ID
 
     # returns all recipes as an array of objects to front end
