@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, jsonify
 
 # flask user login
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required
+from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from flask_bcrypt import Bcrypt
 
 import sqlite3
@@ -97,6 +97,13 @@ def helloWorld():
 @app.route('/index')
 def hello():
     return render_template('main.html')
+
+@app.route('/check_authentication')
+def checkLoggedIn():
+    if current_user.is_authenticated:
+        return jsonify(success=True, data="true")
+    else:
+        return jsonify(success=True, data="false")
 
 
 @app.route('/recipe', methods=['POST'])
