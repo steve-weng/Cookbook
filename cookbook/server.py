@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template, jsonify
 
 # flask user login
 from flask_sqlalchemy import SQLAlchemy
@@ -6,6 +6,7 @@ from flask_login import UserMixin, LoginManager, login_user, logout_user, login_
 from flask_bcrypt import Bcrypt
 
 import sqlite3
+from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
@@ -17,8 +18,6 @@ bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SECRET_KEY'] = 'this is a secret key '
 db = SQLAlchemy(app)
-
-dbFile = "test5.db"
 
 # user obj
 class User(db.Model, UserMixin):
@@ -93,21 +92,7 @@ def checkLoggedIn():
         return jsonify(success=True, data="true")
     else:
         return jsonify(success=True, data="false")
-    
-@app.route('/delete', method=['POST'])
-def deleteRecipe():
-    if request.method != 'POST':
-        return jsonify(success=False, data="Not a POST request")
-        # return unsuccessful
 
-    recipe_name = request.form['recipeName']    
-    # take the incoming post data, should qwbe img, ingredients, steps, put in DB
-    with sqlite3.connect(dbFile) as con:
-        cur = con.cursor()
-        cur.execute("DELETE FROM Recipes WHERE name=?", (recipe_name,))
-        # debug print statements
-        #for row in cur.execute("SELECT * FROM Recipes"):
-        #    print(row)
 
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
@@ -137,7 +122,7 @@ def storeRecipe():
     imgURL = CloudinaryImage(recipe_name).build_url()
 
     # take the incoming post data, should qwbe img, ingredients, steps, put in DB
-    with sqlite3.connect(dbFile) as con:
+    with sqlite3.connect("test5.db") as con:
         cur = con.cursor()
 
         # create the tables if they don't exist
