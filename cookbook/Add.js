@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
+import { View, TextInput, Button, Text, TouchableOpacity, Keyboard, StyleSheet } from 'react-native';
+import Header from './Header';
 
 const Add = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -93,44 +94,59 @@ const Add = ({ navigation }) => {
   };
 
   return (
-    <View style={{ padding: 20 }}>
-        <View style={{flexDirection: 'row'}}>
-            <TextInput 
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
-                onChangeText={handleNameChange}
-                value={name}
-                placeholder="Enter recipe name"
-            />
-            <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
-                onChangeText={handleIngredientChange}
-                onKeyPress={handleKeyPressIngredient}
-                value={ingredient}
-                placeholder="Enter ingredient"
-            />
-            <TouchableOpacity onPress={handleAddIngredient}>
-                <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
-            </TouchableOpacity>
-            <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
-                onChangeText={handleTagChange}
-                onKeyPress={handleKeyPressTag}
-                value={tag}
-                placeholder="Enter tag"
-            />
-            <TouchableOpacity onPress={handleAddTag}>
-                <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
-            </TouchableOpacity>
+    <View style={styles.container}>
+    
+      <View style={styles.header}>
+        <Header />
+      </View>
 
-            <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
-                onChangeText={handleStepsChange}
-                value={steps}
-                placeholder="Enter steps"
-            />
-            <input type="file" onChange={handleImageChange} />
-            <Button onPress={handleSubmit} title="Submit" />
-        </View>
+      <View style={styles.name}>
+        <Text>Recipe Name   </Text>
+          <TextInput 
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
+              onChangeText={handleNameChange}
+              value={name}
+              placeholder="Enter recipe name"
+          />
+      </View>
+
+      <View style={styles.ingredient}>
+        <Text>Ingredients   </Text>
+          <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
+              onChangeText={handleIngredientChange}
+              onKeyPress={handleKeyPressIngredient}
+              value={ingredient}
+              placeholder="Enter ingredient"
+          />
+          <TouchableOpacity onPress={handleAddIngredient}>
+            <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
+          </TouchableOpacity>
+      </View>
+
+      {/* <View style={styles.tag} */}
+        <Text>Tags   </Text>
+        <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
+            onChangeText={handleTagChange}
+            onKeyPress={handleKeyPressTag}
+            value={tag}
+            placeholder="Enter tag"
+          />
+          <TouchableOpacity onPress={handleAddTag}>
+            <Text style={{ color: 'blue', marginTop: 10, marginRight: 50 }}>+</Text>
+          </TouchableOpacity>
+      {/* </View> */}
+
+          
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
+            onChangeText={handleStepsChange}
+            value={steps}
+            placeholder="Enter steps"
+          />
+          <input type="file" onChange={handleImageChange} />
+          <Button onPress={handleSubmit} title="Submit" />
         <View style={{ marginTop: 10, marginLeft: 200 }}>
             {ingredientList.map((item, index) => (
             <Text key={index}>{item}</Text>
@@ -144,5 +160,28 @@ const Add = ({ navigation }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  name: {
+    flexDirection: 'row',
+  },
+  ingredient: {
+    flexDirection: 'row',
+  },
+  tag: {
+    flexDirection: 'row',
+  },
+  header: {
+    position: 'absolute',
+    alignItems:'center',
+    top: "8%",
+  },
+});
 
 export default Add;
