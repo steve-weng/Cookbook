@@ -149,8 +149,19 @@ def storeRecipe():
             recipeList.append(row)
 
         # match itemID to tagID
+        # presumably, the current item ID is unique and new (will have to add a filter for unique recipe name)
+        # so we can simply add the item ID in first column, then each tag in 2nd column iterating
+        res = cur.execute("SELECT COUNT(1) from Recipes") # gets num of rows which is current itemID
+        itemID = res.fetchone()[0]
+
+        for t in tagList:
+            res = cur.execute("SELECT * FROM Tags WHERE tagTitle = ?", (t,))
+            tagID = res.fetchone()[0]
+            cur.execute("INSERT INTO ItemTags VALUES (?, ?)", (itemID, tagID))
 
         # debug print statements
+        for row in cur.execute("SELECT * FROM Recipes"):
+            print(row)
         for row in cur.execute("SELECT * FROM Tags"):
             print(row)
         for row in cur.execute("SELECT * FROM ItemTags"):
