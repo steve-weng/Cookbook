@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
+import { View, TextInput, Button, Text, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 import Header from './Header';
 import MyButton from './MyButton';
 
@@ -115,7 +115,8 @@ const Add = ({ navigation }) => {
 
   return (
 
-      <View style={{ alignItems: 'center'}}>
+      <ScrollView>
+      <View style={{justifyContent:'center', alignItems: 'center'}}>
         <View style={{paddingTop: 60, paddingBottom:50}}>
           <Header />
         </View>
@@ -143,6 +144,10 @@ const Add = ({ navigation }) => {
             </TouchableOpacity>
             </View>
 
+            {ingredientList.map((item, index) => (
+            <Text key={index}>{item}</Text>
+          ))}
+
             <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Tags</Text>
             <View style={{flexDirection: 'row'}}>
             <TextInput
@@ -156,6 +161,9 @@ const Add = ({ navigation }) => {
                 <Text style={{ color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
             </View>
+            {tagList.map((item, index) => (
+            <Text key={index}>{item}</Text>
+        ))}
 
             <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Steps</Text>
             <TextInput
@@ -174,17 +182,8 @@ const Add = ({ navigation }) => {
             </View>
 
         </View>
-        <View style={{ marginTop: 10, marginLeft: 200 }}>
-            {ingredientList.map((item, index) => (
-            <Text key={index}>{item}</Text>
-        ))}
         </View>
-        <View style={{ marginTop: 10, alignItems: 'center' }}>
-            {tagList.map((item, index) => (
-            <Text key={index}>{item}</Text>
-        ))}
-        </View>
-        </View>
+        </ScrollView>
 
   );
 };
