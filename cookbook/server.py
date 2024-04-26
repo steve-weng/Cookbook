@@ -126,6 +126,9 @@ def storeRecipe():
     
     steps = request.form['steps'] # dict (numerical:step)
     img = request.files['img']
+    tags = request.form['tags']
+    tagList = tags.split(",")
+    print(tagList)
 
     from dotenv import load_dotenv
     load_dotenv()
@@ -140,7 +143,7 @@ def storeRecipe():
     #upload image to cloudinary, build a URL to save to DB
     cloudinary.uploader.upload(img, public_id=recipe_name) # recipe names should be unique
     imgURL = CloudinaryImage(recipe_name).build_url()
-    print(imgURL)
+    #print(imgURL)
 
     #imageFile = Image.open(img)    
     #imageFile.show()
@@ -167,7 +170,7 @@ def storeRecipe():
         #    print(row)
             recipeList.append(row)
 
-        print(recipeList)
+        #print(recipeList)
         #for row in cur.execute("SELECT * FROM Tags"):
         #    print(row)
         #for row in cur.execute("SELECT * FROM ItemTags"):

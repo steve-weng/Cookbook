@@ -72,18 +72,12 @@ const Add = ({ navigation }) => {
   const handleSubmit = () => {
     // Handle button press, e.g., submit the input
 
-    var recipeData = {
-    "recipeName":name,
-    "ingredients":ingredientList,
-    "steps":steps,
-    "img":JSON.stringify(image)
-    };
-
     var formData = new FormData();
     formData.append("recipeName", name);
     formData.append("ingredients", ingredientList);
     formData.append("steps", steps);
     formData.append("img", image);
+    formData.append("tags", tagList);
 
 
     console.log(formData.get("recipeName"));
