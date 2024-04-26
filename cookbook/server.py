@@ -127,9 +127,22 @@ def storeRecipe():
     steps = request.form['steps'] # dict (numerical:step)
     img = request.files['img']
 
-    from PIL import Image
+    from dotenv import load_dotenv
+    load_dotenv()
 
-    imageFile = Image.open(img)    
+    # Import the Cloudinary libraries
+    # ==============================
+    import cloudinary
+    from cloudinary import CloudinaryImage
+    import cloudinary.uploader
+    import cloudinary.api
+
+    #upload image to cloudinary, build a URL to save to DB
+    cloudinary.uploader.upload(img, public_id=recipe_name) # recipe names should be unique
+    imgURL = CloudinaryImage(recipe_name).build_url()
+    print(imgURL)
+
+    #imageFile = Image.open(img)    
     #imageFile.show()
 
     #print(recipe_name)
@@ -141,20 +154,20 @@ def storeRecipe():
     #con = sqlite3.connect("test1.db")
     #cur = con.cursor()
     
-    with sqlite3.connect("test2.db") as con:
+    with sqlite3.connect("test1.db") as con:
         cur = con.cursor()
-        cur.execute("CREATE TABLE if not exists Recipes(itemID integer primary key, name, ingredients, steps, img)")
+        cur.execute("CREATE TABLE if not exists Recipes(itemID integer primary key, name, ingredients, steps, imgURL)")
         cur.execute("CREATE TABLE if not exists Tags (tagID integer primary key, tagTitle)")
         cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
 
-        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredients, steps, img))
+        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredients, steps, imgURL))
 
         recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
         #    print(row)
             recipeList.append(row)
 
-        #print(recipeList)
+        print(recipeList)
         #for row in cur.execute("SELECT * FROM Tags"):
         #    print(row)
         #for row in cur.execute("SELECT * FROM ItemTags"):
