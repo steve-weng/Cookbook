@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 import Header from './Header';
 import MyButton from './MyButton';
+import Rectangle from './Rectangle';
 
 const Add = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -144,8 +145,8 @@ const Add = ({ navigation }) => {
             </TouchableOpacity>
             </View>
 
-            {ingredientList.map((item, index) => (
-            <Text key={index}>{item}</Text>
+            {ingredientList.map((item) => (
+              <Rectangle title={item} />
           ))}
 
             <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Tags</Text>
@@ -161,8 +162,8 @@ const Add = ({ navigation }) => {
                 <Text style={{ color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
             </View>
-            {tagList.map((item, index) => (
-            <Text key={index}>{item}</Text>
+            {tagList.map((item) => (
+            <Rectangle title={item}/>
         ))}
 
             <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Steps</Text>
