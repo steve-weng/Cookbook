@@ -36,7 +36,6 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-
 # logins the user
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -88,15 +87,6 @@ def logout():
     logout_user()
     return jsonify(success=True, data="logged out")
 
-
-
-@app.route('/', methods=['GET', 'POST'])
-def helloWorld():
-    return "hello"
-
-@app.route('/index')
-def hello():
-    return render_template('main.html')
 
 @app.route('/check_authentication')
 def checkLoggedIn():
