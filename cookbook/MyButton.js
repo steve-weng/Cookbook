@@ -5,7 +5,7 @@ const MyButton = props => {
     const length = props.title.length;
 
     return (
-        <TouchableOpacity style={[styles.button, {width: length * 20}]} onPress={props.onPressFunction}>
+        <TouchableOpacity style={[styles.button, {width: props.width}]} onPress={props.onPressFunction}>
             <Text style={styles.buttonText}>{props.title}</Text>
         </TouchableOpacity>
     );

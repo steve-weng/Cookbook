@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-native';
 import Header from './Header';
+import MyButton from './MyButton';
 
 const Signup = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -52,15 +53,11 @@ const Signup = ({ navigation }) => {
         value={password}
         secureTextEntry
       />
-      <View style={styles.signupButton}>
-        <TouchableOpacity style={styles.button} onPress={handleSignup}>
-          <Text style={styles.signupText}>Sign up</Text>
-        </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <MyButton title="Sign Up" onPressFunction={handleSignup} width={200}/>
       </View>
-      <View style={styles.signupButton}>
-        <TouchableOpacity style={styles.button} onPress={handleSignup}>
-          <Text style={styles.signupText} onPress={redirectLogin}>Back to login</Text>
-        </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <MyButton title="Back to login" onPressFunction={redirectLogin} width={200}/>
       </View>
     </View>
   );
@@ -92,26 +89,11 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 200,
   },
-  signupButton: {
-    width: 200,
+  buttonContainer: {
     paddingTop: 10,
-    paddingBottom: 10,
-  },
-  button: {
-    backgroundColor: "#FFA800",
-    width: 200, // make this flexible
-    height: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-  },
-  signupText: {
-    color: 'white',
-    fontSize: 18, // make this flexible
-    fontWeight: 800,
-    textAlign: 'center',
-    fontFamily: "Playfair Display",
-  },
+    paddingBottom: 3,
+    alignItems: 'center',
+  }
 });
 
 export default Signup;

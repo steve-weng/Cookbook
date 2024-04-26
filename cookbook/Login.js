@@ -61,7 +61,7 @@ const Login = ({ navigation }) => {
         onChangeText={setPassword}
       />
       <View style={styles.loginContainer}>
-        <MyButton title="Log In" onPressFunction={handleLogin}/>
+        <MyButton title="Log In" onPressFunction={handleLogin} width={200}/>
       </View>
 
       
@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
     width: 200,
   },
   loginContainer: {
-    width: 200, // make this flexible
     paddingTop: 10,
     paddingBottom: 3,
     alignItems: 'center',
