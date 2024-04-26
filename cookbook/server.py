@@ -105,7 +105,9 @@ def deleteRecipe():
     with sqlite3.connect(dbFile) as con:
         cur = con.cursor()
         cur.execute("DELETE FROM Recipes WHERE name=?", (recipe_name,))
-
+        # debug print statements
+        #for row in cur.execute("SELECT * FROM Recipes"):
+        #    print(row)
 
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
