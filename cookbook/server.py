@@ -118,20 +118,24 @@ def storeRecipe():
     if request.method != 'POST':
         return jsonify(success=False, data="Not a POST request")
         # return unsuccessful
-    jsonData = request.get_json()
-    recipe_name = jsonData['recipeName']
-    ingredients = jsonData['ingredients'] # dict (item:volume:potentially unit)
-    # parse list of ingredients to string
-    if ingredients is not None:
-        ingredientList = str(ingredients[0])
-        for i in range(1, len(ingredients)):
-            ingredientList = ingredientList + "," + ingredients[i]
+
+    recipe_name = request.form['recipeName']
+    ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
+    #print(type(ingredients))
+    #print(ingredients)
     
-    steps = jsonData['steps'] # dict (numerical:step)
-    img = jsonData['img']
-    print(recipe_name)
-    print(ingredientList)
-    print(steps)
+    steps = request.form['steps'] # dict (numerical:step)
+    img = request.files['img']
+
+    from PIL import Image
+
+    imageFile = Image.open(img)    
+    #imageFile.show()
+
+    #print(recipe_name)
+    #print(ingredients)
+    #print(steps)
+
     # take the incoming post data, should be img, ingredients, steps, put in DB
     # we'll add checks later to see if database already exists
     #con = sqlite3.connect("test1.db")
@@ -143,12 +147,12 @@ def storeRecipe():
         cur.execute("CREATE TABLE if not exists Tags (tagID integer primary key, tagTitle)")
         cur.execute("CREATE TABLE if not exists ItemTags (itemID, tagID)")
 
-        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredientList, steps, img))
+        cur.execute("INSERT INTO Recipes VALUES (NULL, ?, ?, ?, ?)", (recipe_name, ingredients, steps, img))
 
         recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
         #    print(row)
-         #   recipeList.append(row)
+            recipeList.append(row)
 
         #print(recipeList)
         #for row in cur.execute("SELECT * FROM Tags"):
