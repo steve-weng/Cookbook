@@ -37,7 +37,13 @@ const Login = ({ navigation }) => {
   };
 
   const redirectHome = () => {
-    navigation.navigate('Home');
+    fetch('http://127.0.0.1:5000/check_authentication').then(res => res.json()).then(data => {
+    if (data.data == "true"){
+      navigation.navigate('Home');
+    }
+     }); 
+     // comment this out when not debugging - prevents accessing home page if not logged in
+     navigation.navigate('Home');
   }
 
 
