@@ -98,18 +98,6 @@ def helloWorld():
 def hello():
     return render_template('main.html')
 
-@app.route('/tex', methods=['POST'])
-def get_t():
-    if request.method == 'POST':
-        print("post")
-        jsonData = request.get_json()
-        print(jsonData)
-        print(jsonData['firstParam'])
-        print(jsonData['secondParam'])
-    else:
-        print("maybe a get")
-    return jsonify(success=True, data="write this lol")
-
 
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
