@@ -99,20 +99,6 @@ def helloWorld():
 def hello():
     return render_template('main.html')
 
-@app.route('/tex', methods=['POST'])
-def get_t():
-    if request.method == 'POST':
-        print("post")
-        jsonData = request.get_json()
-        print(jsonData)
-        print(jsonData['firstParam'])
-        print(jsonData['secondParam'])
-    else:
-        print("maybe a get")
-    return jsonify(success=True, data="write this lol")
-    #response = jsonify({'text': request.args['text'] + 'this is a set text from the server lol'})
-    #return response
-
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
     if request.method != 'POST':
@@ -143,19 +129,8 @@ def storeRecipe():
     #upload image to cloudinary, build a URL to save to DB
     cloudinary.uploader.upload(img, public_id=recipe_name) # recipe names should be unique
     imgURL = CloudinaryImage(recipe_name).build_url()
-    #print(imgURL)
-
-    #imageFile = Image.open(img)    
-    #imageFile.show()
-
-    #print(recipe_name)
-    #print(ingredients)
-    #print(steps)
 
     # take the incoming post data, should be img, ingredients, steps, put in DB
-    # we'll add checks later to see if database already exists
-    #con = sqlite3.connect("test1.db")
-    #cur = con.cursor()
     
     with sqlite3.connect("test1.db") as con:
         cur = con.cursor()
