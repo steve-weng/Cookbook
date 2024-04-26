@@ -3,15 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
 
 const Home = ({ navigation }) => {
-  // react states for ingredients and steps
-  const [ingredient, setIngredient] = useState('');
-  const [ingredientList, setIngredientList] = useState([]);
-  const [steps, setSteps] = useState('');
 
-  const handleIngredientChange = (text) => {
-    setIngredient(text);
-    console.log(text)
-  }
+  const [recipes, setRecipes] = useState([]);
 
   const handleLogout = () => {
     navigation.navigate('Login');
@@ -44,16 +37,6 @@ const Home = ({ navigation }) => {
     });
   }
 
-  const handleKeyPress = (event) => {
-    if (event.nativeEvent.key === 'Enter') {
-      handleAddIngredient();
-    }
-  }
-
-  const handleStepsChange = (text) => {
-    setSteps(text);
-  }
-
   //useEffect(() => {
    // fetch('/tex').then(res => res.json()).then(data => {
     //  setText(data.text);
@@ -83,14 +66,14 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={{ padding: 20 }}>
-      <View style={{ marginTop: 10 }}>
-        {ingredientList.map((item, index) => (
-          <Text key={index}>{item}</Text>
+      {recipes.map((item) => (
+            console.log(item.name)
         ))}
-      </View>
       <Button title="Add recipe" onPress={redirectAdd} />
       <Button title="Logout" onPress={handleLogout} />
     </View>
+
+
   );
 };
 

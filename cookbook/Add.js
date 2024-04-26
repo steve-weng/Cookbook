@@ -129,8 +129,8 @@ const Add = ({ navigation }) => {
             </TouchableOpacity>
             </View>
 
-            {ingredientList.map((item) => (
-              <Rectangle title={item} />
+            {ingredientList.map((item, index) => (
+              <Rectangle id={index} title={item} />
           ))}
 
             <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Tags</Text>
@@ -146,8 +146,8 @@ const Add = ({ navigation }) => {
                 <Text style={{ color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
             </View>
-            {tagList.map((item) => (
-            <Rectangle title={item}/>
+            {tagList.map((item, index) => (
+            <Rectangle id={index} title={item}/>
         ))}
 
             <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Steps</Text>
