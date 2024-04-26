@@ -143,17 +143,18 @@ def storeRecipe():
             if (c.fetchone() is None): # if the tag doesn't exist, insert it
                 cur.execute("INSERT INTO Tags VALUES (NULL, ?)", (t,))
 
+        # creates an array of recipe obj to return to frontend for display
         recipeList = [] 
         for row in cur.execute("SELECT * FROM Recipes"):
-        #    print(row)
             recipeList.append(row)
 
+        # match itemID to tagID
+
+        # debug print statements
         for row in cur.execute("SELECT * FROM Tags"):
             print(row)
         for row in cur.execute("SELECT * FROM ItemTags"):
             print(row)
-         #if tag does not exist in table Tags
-        # insert the new tag at the end with increasing ID
 
     # returns all recipes as an array of objects to front end
     return jsonify(success=True, data=recipeList)
