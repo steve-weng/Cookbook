@@ -96,9 +96,14 @@ def checkLoggedIn():
 
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
+
+    print('1')
     if request.method != 'POST':
+        print('2')
         return jsonify(success=False, data="Not a POST request")
         # return unsuccessful
+
+    print('3')
 
     recipe_name = request.form['recipeName']
     ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
@@ -106,7 +111,7 @@ def storeRecipe():
     img = request.files['img']
     tags = request.form['tags']
     tagList = tags.split(",")
-
+    print('4')
     from dotenv import load_dotenv
     load_dotenv()
 
