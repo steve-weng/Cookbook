@@ -9,6 +9,7 @@ const Home = ({ navigation }) => {
 
   const handleIngredientChange = (text) => {
     setIngredient(text);
+    console.log(text)
   }
 
   const handleLogout = () => {
@@ -22,6 +23,22 @@ const Home = ({ navigation }) => {
     if (ingredientInputRef.current) {
       ingredientInputRef.current.focus();
     }
+    console.log(ingredientList)
+    console.log(ingredient)
+    var data1 = {"ingredients":ingredient, "steps":steps};
+    //data1.append("firstParam", "thisval");
+    //data1.append("secondParam", "12");
+   fetch('http://127.0.0.1:5000/recipe', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data1),
+   })
+   .then(res => res.json()).then(data => {
+     console.log(data);
+    });
   }
 
   const handleKeyPress = (event) => {
@@ -33,6 +50,33 @@ const Home = ({ navigation }) => {
   const handleStepsChange = (text) => {
     setSteps(text);
   }
+
+  //useEffect(() => {
+   // fetch('/tex').then(res => res.json()).then(data => {
+    //  setText(data.text);
+    //});
+  //}, []);
+
+  const handleButtonPress = () => {
+    // Handle button press, e.g., submit the input
+   //var data1 = new FormData();
+   var data1 = {"firstParam":"thisval", "secondParam":"2ndVal"};
+    //data1.append("firstParam", "thisval");
+    //data1.append("secondParam", "12");
+   fetch('http://127.0.0.1:5000/tex', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data1),
+   })
+   .then(res => res.json()).then(data => {
+     console.log(data);
+     setText(data.data)
+    });
+    console.log('Input submitted:', text);
+  };
 
   return (
     <View style={{ padding: 20 }}>
