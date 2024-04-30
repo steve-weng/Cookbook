@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
+import Header from './Header';
+import MyButton from './MyButton';
 
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
@@ -26,16 +28,28 @@ const Home = ({ navigation }) => {
   }
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={{justifyContent:'center', alignItems: 'center'}}>
+        <View style={{paddingTop: 60, paddingBottom: 15}}>
+          <Header />
+        </View>
+
     <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, padding: 10, marginBottom: 20 }}
+        style={{ width: 250, height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 50, padding: 10, marginBottom: 20 }}
         placeholder="Search"
         onChangeText={handleSearchChange}
         value={searchText}
       />
-      <Button title="Search" onPress={handleSearch} />
-      <Button title="Add recipe" onPress={redirectAdd} />
-      <Button title="Logout" onPress={handleLogout} />
+      <View style={{paddingBottom: 12}}>
+        <MyButton title="Search" width={200} onPressFunction={handleSearch} />
+      </View>
+
+      <View style={{paddingBottom: 12}}>
+        <MyButton title="Add recipe" width={200} onPressFunction={redirectAdd} />
+      </View>
+      
+      <View style={{paddingBottom: 12}}>
+        <MyButton title="Logout" width={200} onPressFunction={handleLogout} />
+      </View>
     </View>
 
 
