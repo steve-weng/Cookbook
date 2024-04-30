@@ -16,16 +16,19 @@ const Home = ({ navigation }) => {
     navigation.navigate('Add');
   }
 
-  const handleSearch = () => {
-    // search logic here
-    // send searchText to backend and filter out appropriate recipes
-    // send recipes back to frontend
-  }
-
   const handleSearchChange = (text) => {
     setSearchText(text);
-    console.log(searchText);
   }
+
+  useEffect(() => {
+    if (searchText === '') {
+      // if search text is empty, fetch all recipes
+      console.log("all recipes");
+    } else {
+      // Otherwise, fetch recipes based on search text
+      console.log(searchText);
+    }
+  }, [searchText]);
 
   return (
     <View style={{justifyContent:'center', alignItems: 'center'}}>
@@ -39,9 +42,6 @@ const Home = ({ navigation }) => {
         onChangeText={handleSearchChange}
         value={searchText}
       />
-      <View style={{paddingBottom: 12}}>
-        <MyButton title="Search" width={200} onPressFunction={handleSearch} />
-      </View>
 
       <View style={{paddingBottom: 12}}>
         <MyButton title="Add recipe" width={200} onPressFunction={redirectAdd} />
