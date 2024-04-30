@@ -3,10 +3,8 @@ import { View, TextInput, Button, Text, TouchableOpacity, Keyboard, ScrollView }
 import Header from './Header';
 import MyButton from './MyButton';
 import Rectangle from './Rectangle';
-import { useNavigation } from '@react-navigation/native';
 
-const Add = () => {
-  const navigation = useNavigation();
+const Add = ({ navigation }) => {
 
   const [name, setName] = useState('');
   const [ingredient, setIngredient] = useState('');
@@ -15,7 +13,6 @@ const Add = () => {
   const [tagList, setTagList] = useState([]);
   const [steps, setSteps] = useState('');
   const [image, setImage] = useState(null);
-  const [recipes, setRecipes] = useState([]);
 
   // Recipe Name
   const handleNameChange = (text) => {
@@ -100,10 +97,7 @@ const Add = () => {
 
     if(data.success) {
       console.log(data);
-      setRecipes(data.data);
-      navigate.navigation('Home', { recipes: recipes })
-    } else {
-      navigate.navigation('Home', { recipes: recipes })
+      navigate.navigation('Home');
     }
      
     });
