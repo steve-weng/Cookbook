@@ -105,7 +105,7 @@ def getRecipes():
         if name == "" or name.isspace():
             c = cur.execute("SELECT * FROM Recipes")
         else:
-            c = cur.execute("SELECT * FROM Recipes WHERE name = ?", (name,))
+            c = cur.execute("SELECT * FROM Recipes WHERE name LIKE ?", ('%'+name+'%',))
         
         recipes = c.fetchall()
         for r in recipes:
