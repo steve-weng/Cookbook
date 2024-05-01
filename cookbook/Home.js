@@ -21,12 +21,6 @@ const Home = ({ navigation }) => {
   }
 
   useEffect(() => {
-    if (searchText === '') {
-      // if search text is empty, fetch all recipes
-      console.log("all recipes");
-    } else {
-      // Otherwise, fetch recipes based on search text
-
       var formData = new FormData();
       formData.append("recipeName", searchText);
      fetch('http://127.0.0.1:5000/getRecipes', {
@@ -44,7 +38,6 @@ const Home = ({ navigation }) => {
       }
     });
     console.log(searchText);
-    }
   }, [searchText]);
 
   return (
