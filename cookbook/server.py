@@ -10,6 +10,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+dbFile = "test5.db"
+
 # flask login stuff
 login_manager = LoginManager(app)
 bcrypt = Bcrypt(app)
@@ -96,11 +98,11 @@ def checkLoggedIn():
 
 @app.route('/getRecipes', methods=['POST'])
 def getRecipes():
-    with sqlite3.connect("test5.db") as con:
+    with sqlite3.connect(dbFile) as con:
         cur = con.cursor()
         name = request.form['recipeName']
 
-        if name == "":
+        if name == "" or name.isspace():
             c = cur.execute("SELECT * FROM Recipes")
         else:
             c = cur.execute("SELECT * FROM Recipes WHERE name = ?", (name,))
@@ -141,7 +143,7 @@ def storeRecipe():
     imgURL = CloudinaryImage(recipe_name).build_url()
 
     # take the incoming post data, should qwbe img, ingredients, steps, put in DB
-    with sqlite3.connect("test5.db") as con:
+    with sqlite3.connect(dbFile) as con:
         cur = con.cursor()
 
         # create the tables if they don't exist
