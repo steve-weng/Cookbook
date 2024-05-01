@@ -92,18 +92,32 @@ def checkLoggedIn():
         return jsonify(success=True, data="true")
     else:
         return jsonify(success=True, data="false")
+    
+
+@app.route('/getRecipes', methods=['POST'])
+def getRecipes():
+    with sqlite3.connect("test5.db") as con:
+        cur = con.cursor()
+        name = request.form['recipeName']
+
+        if name == "":
+            c = cur.execute("SELECT * FROM Recipes")
+        else:
+            c = cur.execute("SELECT * FROM Recipes WHERE name = ?", (name,))
+        
+        recipes = c.fetchall()
+        for r in recipes:
+            print(r)
+        
+        return jsonify(success=True, data=recipes)
 
 
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
 
-    print('1')
     if request.method != 'POST':
-        print('2')
         return jsonify(success=False, data="Not a POST request")
         # return unsuccessful
-
-    print('3')
 
     recipe_name = request.form['recipeName']
     ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
@@ -111,7 +125,7 @@ def storeRecipe():
     img = request.files['img']
     tags = request.form['tags']
     tagList = tags.split(",")
-    print('4')
+
     from dotenv import load_dotenv
     load_dotenv()
 

@@ -26,7 +26,24 @@ const Home = ({ navigation }) => {
       console.log("all recipes");
     } else {
       // Otherwise, fetch recipes based on search text
-      console.log(searchText);
+
+      var formData = new FormData();
+      formData.append("recipeName", searchText);
+     fetch('http://127.0.0.1:5000/getRecipes', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json'
+      },
+      body: formData,
+     })
+     .then(res => res.json()).then(data => {
+  
+      if(data.success) {
+        console.log(data);
+       // navigate.navigation('Home');
+      }
+    });
+    console.log(searchText);
     }
   }, [searchText]);
 
