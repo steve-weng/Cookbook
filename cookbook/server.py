@@ -108,6 +108,7 @@ def getRecipes():
             c = cur.execute("SELECT * FROM Recipes WHERE name LIKE ?", ('%'+name+'%',))
         
         recipes = c.fetchall()
+
         for r in recipes:
             print(r)
         
@@ -137,7 +138,7 @@ def editRecipe():
         field = request.form['columnName'] # front passes which column to edit
         newVal = request.form['content'] # the new content to add to the cell
 
-        c = cur.execute("UPDATE Recipes SET ? = ? WHERE name = ?", (field, newVal, name))
+        c = cur.execute("UPDATE Recipes SET (%s) = ? WHERE name = ?" % (field), (newVal, name))
         recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
             recipeList.append(row)
