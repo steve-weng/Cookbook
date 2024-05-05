@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, Keyboard } from 'react-native';
 import Header from './Header';
 import MyButton from './MyButton';
-import Recipe from './Recipe'
 
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [recipes, setRecipes] = useState([]);
+  //let recipeList = [];
 
   const handleLogout = () => {
     navigation.navigate('Login');
@@ -33,7 +33,9 @@ const Home = ({ navigation }) => {
      })
      .then(res => res.json()).then(data => {
   
-      if(data.success) {
+      if(data.success) {  
+        // recipeList = data.data;
+        //console.log(data.data);
         setRecipes(data.data);
       }
     
@@ -54,7 +56,7 @@ const Home = ({ navigation }) => {
       />
 
       {recipes.map((recipe, index) => (
-        <Recipe key={index} content={recipe} />
+        <Text key={index}>{recipe[1]}</Text> // Assuming each recipe object has a "name" property
       ))}
 
       <View style={{paddingBottom: 12}}>
