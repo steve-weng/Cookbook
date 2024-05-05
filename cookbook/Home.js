@@ -7,6 +7,7 @@ import MyButton from './MyButton';
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [recipes, setRecipes] = useState([]);
+  //let recipeList = [];
 
   const handleLogout = () => {
     navigation.navigate('Login');
@@ -33,12 +34,16 @@ const Home = ({ navigation }) => {
      .then(res => res.json()).then(data => {
   
       if(data.success) {
-        console.log(data);
-       // navigate.navigation('Home');
+        // recipeList = data.data;
+        //console.log(data.data);
+        setRecipes(data.data);
       }
+    
     });
-    console.log(searchText);
   }, [searchText]);
+
+  let test = recipes
+  console.log(typeof(recipes));
 
   return (
     <View style={{justifyContent:'center', alignItems: 'center'}}>
@@ -52,6 +57,10 @@ const Home = ({ navigation }) => {
         onChangeText={handleSearchChange}
         value={searchText}
       />
+
+      {recipes.map((recipe, index) => (
+        <Text key={index}>{recipe[3]}</Text> // Assuming each recipe object has a "name" property
+      ))}
 
       <View style={{paddingBottom: 12}}>
         <MyButton title="Add recipe" width={200} onPressFunction={redirectAdd} />
