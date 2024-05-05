@@ -129,6 +129,23 @@ def deleteRecipe():
         return jsonify(success=True, data=recipeList)
 
 
+@app.route('/editRecipe', methods=['POST'])
+def editRecipe():
+    with sqlite3.connect(dbFile) as con:
+        cur = con.cursor()
+        name = request.form['recipeName']
+        field = request.form['columnName'] # front passes which column to edit
+        newVal = request.form['content'] # the new content to add to the cell
+
+        c = cur.execute("UPDATE Recipes SET ? = ? WHERE name = ?", (field, newVal, name))
+        recipeList = []
+        for row in cur.execute("SELECT * FROM Recipes"):
+            recipeList.append(row)
+        
+        # return the updated recipe list
+        return jsonify(success=True, data=recipeList)
+    
+
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
 
