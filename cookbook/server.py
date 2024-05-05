@@ -114,6 +114,21 @@ def getRecipes():
         return jsonify(success=True, data=recipes)
 
 
+@app.route('/deleteRecipe', methods=['POST'])
+def deleteRecipe():
+    with sqlite3.connect(dbFile) as con:
+        cur = con.cursor()
+        name = request.form['recipeName']
+
+        c = cur.execute("DELETE FROM Recipes WHERE name = ?", (name,))
+        recipeList = []
+        for row in cur.execute("SELECT * FROM Recipes"):
+            recipeList.append(row)
+        
+        # return the updated recipe list
+        return jsonify(success=True, data=recipeList)
+
+
 @app.route('/recipe', methods=['POST'])
 def storeRecipe():
 
@@ -165,7 +180,9 @@ def storeRecipe():
                 cur.execute("INSERT INTO Tags VALUES (NULL, ?)", (t,))
 
         # creates an array of recipe obj to return to frontend for display
-        recipeList = [] 
+        recipeList = []
+
+
         for row in cur.execute("SELECT * FROM Recipes"):
             recipeList.append(row)
 

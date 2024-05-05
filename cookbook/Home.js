@@ -33,7 +33,7 @@ const Home = ({ navigation }) => {
      })
      .then(res => res.json()).then(data => {
   
-      if(data.success) {
+      if(data.success) {  
         // recipeList = data.data;
         //console.log(data.data);
         setRecipes(data.data);
@@ -41,9 +41,6 @@ const Home = ({ navigation }) => {
     
     });
   }, [searchText]);
-
-  let test = recipes
-  console.log(typeof(recipes));
 
   return (
     <View style={{justifyContent:'center', alignItems: 'center'}}>
@@ -59,7 +56,7 @@ const Home = ({ navigation }) => {
       />
 
       {recipes.map((recipe, index) => (
-        <Text key={index}>{recipe[3]}</Text> // Assuming each recipe object has a "name" property
+        <Text key={index}>{recipe[1]}</Text> // Assuming each recipe object has a "name" property
       ))}
 
       <View style={{paddingBottom: 12}}>
