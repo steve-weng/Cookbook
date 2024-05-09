@@ -7,6 +7,7 @@ import Signup from './Signup';
 import Home from './Home';
 import Add from './Add';
 import RecipeView from './RecipeView';
+import RecipeEdit from './RecipeEdit';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Add" component={Add} />
         <Stack.Screen name="RecipeView" component={RecipeView} />
+        <Stack.Screen name="RecipeEdit" component={RecipeEdit} />
       </Stack.Navigator>
     </NavigationContainer>
   );
