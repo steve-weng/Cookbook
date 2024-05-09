@@ -39,8 +39,8 @@ const Home = ({ navigation }) => {
     });
   }, [searchText]);
 
-  const redirectRecipeView = () => {
-    navigation.navigate('Login');
+  const redirectRecipeView = (recipe) => {
+    navigation.navigate('RecipeView', {recipe});
   }
 
   return (
@@ -68,7 +68,7 @@ const Home = ({ navigation }) => {
       </View>
 
       {recipes.map((recipe, index) => (
-        <Recipe key={index} content={recipe} onPressFunction={redirectRecipeView}/>
+        <Recipe key={index} content={recipe} onPressFunction={() => redirectRecipeView(recipe)}/>
       ))}
 
       
