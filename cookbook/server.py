@@ -134,15 +134,34 @@ def deleteRecipe():
 def editRecipe():
     with sqlite3.connect(dbFile) as con:
         cur = con.cursor()
-        name = request.form['recipeName']
-        field = request.form['columnName'] # front passes which column to edit
-        newVal = request.form['content'] # the new content to add to the cell
+        #name = request.form['recipeName']
+        #field = request.form['columnName'] # front passes which column to edit
+        #newVal = request.form['content'] # the new content to add to the cell
 
-        c = cur.execute("UPDATE Recipes SET (%s) = ? WHERE name = ?" % (field), (newVal, name))
+        print("--===--------------editing----------------------")
+        name = request.form['recipeName']
+        print("?")
+        ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
+        print("??")
+        steps = request.form['steps'] # dict (numerical:step)
+        print("???")
+        #img = request.files['img']
+        #tags = request.form['tags']
+        #tagList = tags.split(",")
+        print("retrieved-----------------")
+        #c = cur.execute("UPDATE Recipes SET (%s) = ? WHERE name = ?" % (field), (newVal, name))
+        cur.execute("UPDATE Recipes SET ingredients = ? WHERE name = ?", (ingredients, name))
+        print("1")
+        cur.execute("UPDATE Recipes SET steps = ? WHERE name = ?", (steps, name))
+        print("2")
+        #cur.execute("UPDATE Recipes SET imgURL = ? WHERE name = ?", (img, name))
+        #cur.execute("UPDATE Recipes SET name = ? WHERE name = ?", (img, name))
+
         recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
             recipeList.append(row)
         
+        print(recipeList)
         # return the updated recipe list
         return jsonify(success=True, data=recipeList)
     

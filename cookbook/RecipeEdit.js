@@ -31,6 +31,29 @@ const RecipeEdit = ({navigation}) => {
 
     const handleSubmit = () => {
         //updates database
+        var formData = new FormData();
+        formData.append("recipeName", name);
+        formData.append("ingredients", ingredients);
+        formData.append("steps", steps);
+        //formData.append("img", image);
+        //formData.append("tags", tagList)
+      
+       fetch('http://127.0.0.1:5000/editRecipe', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData,
+       })
+       .then(res => res.json()).then(data => {
+    
+        if(data.success) {
+          console.log(data);
+          navigate.navigation('Home');
+        }
+         
+        });
+
         navigation.navigate('Home');
     }
 
