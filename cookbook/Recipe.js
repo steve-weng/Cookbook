@@ -5,15 +5,15 @@ const Recipe = props => {
     const recipe = props.content;
 
     const redirectPage = () => {
-        navigation.navigate('Login');
+        navigation.navigate('RecipeView', {recipe});
     }
 
     return (
         <View style={{alignContent:'center'}}>
-            <TouchableOpacity style={[styles.button, {width: 320, height: 186, marginBottom: 20}]} onPress={redirectPage}>
+            <TouchableOpacity style={[styles.button, {width: 320, height: 150, marginBottom: 20}]} onPress={props.onPressFunction}>
             <View style={{flexDirection: 'row', marginLeft: 18, marginTop: 18}}>
                 <Image 
-                    style={{width: 150, height: 150, marginRight: 10}}
+                    style={{width: 120, height: 120, marginRight: 10}}
         q           source={{uri:recipe[4]}}/>
                 <Text style={styles.buttonText}>{recipe[1]}</Text>
             </View>

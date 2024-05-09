@@ -39,6 +39,10 @@ const Home = ({ navigation }) => {
     });
   }, [searchText]);
 
+  const redirectRecipeView = () => {
+    navigation.navigate('Login');
+  }
+
   return (
     <View style={{justifyContent:'center', alignItems: 'center'}}>
         <View style={{paddingTop: 60, paddingBottom: 15}}>
@@ -52,17 +56,22 @@ const Home = ({ navigation }) => {
         value={searchText}
       />
 
-      {recipes.map((recipe, index) => (
-        <Recipe key={index} content={recipe} />
-      ))}
+      <View style={{flexDirection: 'row'}}>
 
-      <View style={{paddingBottom: 12}}>
-        <MyButton title="Add recipe" width={200} onPressFunction={redirectAdd} />
+      <View style={{paddingBottom: 12, paddingRight: 12}}>
+        <MyButton title="Add recipe" width={100} onPressFunction={redirectAdd} />
       </View>
       
-      <View style={{paddingBottom: 12}}>
-        <MyButton title="Logout" width={200} onPressFunction={handleLogout} />
+      <View style={{paddingBottom: 12, paddingLeft: 12}}>
+        <MyButton title="Logout" width={100} onPressFunction={handleLogout} />
+      </View> 
       </View>
+
+      {recipes.map((recipe, index) => (
+        <Recipe key={index} content={recipe} onPressFunction={redirectRecipeView}/>
+      ))}
+
+      
     </View>
 
 
