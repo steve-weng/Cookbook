@@ -15,6 +15,24 @@ const RecipeView = ({navigation}) => {
     const handleDelete = () => {
         // delete the function from database here
         // automatically redirects back to home
+
+        var formData = new FormData();
+        formData.append("recipeName", recipe[1]);
+       fetch('http://127.0.0.1:5000/deleteRecipe', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData,
+       })
+       .then(res => res.json()).then(data => {
+    
+        if(data.success) {
+          console.log(data);
+          navigate.navigation('Home');
+        }
+         
+        });
         navigation.navigate('Home');
     }
 
