@@ -35,17 +35,26 @@ const RecipeView = ({navigation}) => {
             <Text style={{fontWeight: 900, paddingBottom: 20, fontFamily: "PlayfairDisplay", fontSize: 30}}>{recipe[1]}</Text>
           </View>
 
-          <View style={{flexDirection: 'column', position: 'absolute', marginLeft: -145, marginTop: 450}}>
+          <View style={{flexDirection: 'column'}}>
               <Text style={{paddingBottom: 5, marginRight: 15, fontWeight: 750, fontFamily: "PlayfairDisplay", fontSize: 20}}>Ingredients:</Text>
               <Text style={{paddingBottom: 20, fontFamily: "PlayfairDisplay", fontSize: 17}}>{recipe[2]}</Text>
 
             <Text style={{paddingBottom: 5, marginRight: 15, fontWeight: 750, fontFamily: "PlayfairDisplay", fontSize: 20}}>Steps</Text>
             <Text style={{paddingBottom: 20, fontFamily: "PlayfairDisplay", fontSize: 17}}>{recipe[3]}</Text>
+
+            <View style={{alignItems: 'center'}}>
+            <MyButton width={200} title="Back" onPressFunction={redirectHome} />
+            </View>
+
+            <View style={{alignItems: 'center', paddingTop: 10}}>
+            <MyButton width={200} title="Edit" onPressFunction={handleEdit} />
+            </View>
+
+            <View style={{alignItems: 'center', paddingTop: 10}}>
+            <MyButton width={200} title="Delete" onPressFunction={handleDelete} />
+            </View>
           </View>
 
-          <MyButton title="Back" width={100} onPressFunction={redirectHome} />
-          <MyButton title="Edit" width={100} onPressFunction={handleEdit} />
-          <MyButton title="Delete" width={100} onPressFunction={handleDelete} />
         </View>
     );
   };

@@ -112,7 +112,7 @@ const Add = ({ navigation }) => {
         </View>
       
         <View style={{flexDirection: 'column'}}>
-        <Text style={{paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Recipe Name</Text>
+        <Text style={{fontWeight: 700, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Recipe Name</Text>
             <TextInput 
                 style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
                 onChangeText={handleNameChange}
@@ -120,7 +120,7 @@ const Add = ({ navigation }) => {
                 placeholder="Enter recipe name"
             />
 
-            <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Ingredients</Text>
+            <Text style={{fontWeight: 700, paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Ingredients</Text>
             <View style={{flexDirection: 'row'}}>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
@@ -130,7 +130,7 @@ const Add = ({ navigation }) => {
                 placeholder="Enter ingredient"
             />
             <TouchableOpacity onPress={handleAddIngredient}>
-                <Text style={{ color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
+                <Text style={{ fontWeight: 700, color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
             </View>
 
@@ -138,7 +138,7 @@ const Add = ({ navigation }) => {
               <Rectangle id={index} title={item} />
           ))}
 
-            <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Tags</Text>
+            <Text style={{fontWeight: 700, paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Tags</Text>
             <View style={{flexDirection: 'row'}}>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
@@ -148,14 +148,14 @@ const Add = ({ navigation }) => {
                 placeholder="Enter tag"
             />
             <TouchableOpacity onPress={handleAddTag}>
-                <Text style={{ color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
+                <Text style={{ fontWeight: 700, color: "#FFA800", marginTop: 10, marginRight: 50 }}>+</Text>
             </TouchableOpacity>
             </View>
             {tagList.map((item, index) => (
             <Rectangle id={index} title={item}/>
         ))}
 
-            <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Steps</Text>
+            <Text style={{fontWeight: 700, paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Steps</Text>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
                 onChangeText={handleStepsChange}
