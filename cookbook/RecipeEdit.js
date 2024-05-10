@@ -7,6 +7,7 @@ import MyButton from './MyButton';
 const RecipeEdit = ({navigation}) => {
     const route = useRoute(); 
     const recipe = route.params.recipe;
+    const oldName = recipe[1];
 
     const [name, setName] = useState(recipe[1]);
     const [ingredients, setIngredients] = useState(recipe[2]);
