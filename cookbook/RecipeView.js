@@ -29,7 +29,7 @@ const RecipeView = ({navigation}) => {
     
         if(data.success) {
           console.log(data);
-          navigate.navigation('Home');
+          navigation.navigate('Home');
         }
          
         });

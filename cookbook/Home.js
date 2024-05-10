@@ -37,7 +37,7 @@ const Home = ({ navigation }) => {
       }
     
     });
-  }, [searchText]);
+  });
 
   const redirectRecipeView = (recipe) => {
     navigation.navigate('RecipeView', {recipe});
