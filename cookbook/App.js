@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, View } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import "@fontsource/playfair-display"; 
+import AppLoading from 'expo-app-loading';
 import Login from './Login';
 import Signup from './Signup';
 import Home from './Home';
@@ -9,9 +9,45 @@ import Add from './Add';
 import RecipeView from './RecipeView';
 import RecipeEdit from './RecipeEdit';
 
+import {
+  useFonts,
+  PlayfairDisplay_400Regular,
+  PlayfairDisplay_500Medium,
+  PlayfairDisplay_600SemiBold,
+  PlayfairDisplay_700Bold,
+  PlayfairDisplay_800ExtraBold,
+  PlayfairDisplay_900Black,
+  PlayfairDisplay_400Regular_Italic,
+  PlayfairDisplay_500Medium_Italic,
+  PlayfairDisplay_600SemiBold_Italic,
+  PlayfairDisplay_700Bold_Italic,
+  PlayfairDisplay_800ExtraBold_Italic,
+  PlayfairDisplay_900Black_Italic,
+} from '@expo-google-fonts/playfair-display';
+
 const Stack = createStackNavigator();
 
 const App = () => {
+
+let [fontsLoaded] = useFonts({
+  PlayfairDisplay_400Regular,
+  PlayfairDisplay_500Medium,
+  PlayfairDisplay_600SemiBold,
+  PlayfairDisplay_700Bold,
+  PlayfairDisplay_800ExtraBold,
+  PlayfairDisplay_900Black,
+  PlayfairDisplay_400Regular_Italic,
+  PlayfairDisplay_500Medium_Italic,
+  PlayfairDisplay_600SemiBold_Italic,
+  PlayfairDisplay_700Bold_Italic,
+  PlayfairDisplay_800ExtraBold_Italic,
+  PlayfairDisplay_900Black_Italic,
+});
+
+
+if(!fontsLoaded) {
+  return <AppLoading />
+} else {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login" screenOptions={{
@@ -26,6 +62,8 @@ const App = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
+
+}
 };
 
 export default App;

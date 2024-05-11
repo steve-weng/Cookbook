@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
       <View style={styles.header}>
         <Header />
       </View>
-      <Text style={[styles.welcomeText, {fontSize: width * 0.03}]}>Welcome!</Text>
+      <Text style={[styles.welcomeText, {fontSize: width * 0.09}]}>Welcome!</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -97,9 +97,8 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     lineHeight: 35,
-    fontWeight: 800,
     textAlign: "center",
-    fontFamily: "Playfair Display",
+    fontFamily: 'PlayfairDisplay_800ExtraBold',
     paddingBottom: 20,
   },
   input: {
