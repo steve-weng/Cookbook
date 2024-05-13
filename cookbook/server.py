@@ -139,6 +139,7 @@ def editRecipe():
         #newVal = request.form['content'] # the new content to add to the cell
 
         print("--===--------------editing----------------------")
+        oldName = request.form['oldRecipeName']
         name = request.form['recipeName']
         print("?")
         ingredients = request.form['ingredients'] # dict (item:volume:potentially unit)
@@ -150,12 +151,14 @@ def editRecipe():
         #tagList = tags.split(",")
         print("retrieved-----------------")
         #c = cur.execute("UPDATE Recipes SET (%s) = ? WHERE name = ?" % (field), (newVal, name))
-        cur.execute("UPDATE Recipes SET ingredients = ? WHERE name = ?", (ingredients, name))
+        cur.execute("UPDATE Recipes SET ingredients = ? WHERE name = ?", (ingredients, oldName))
         print("1")
-        cur.execute("UPDATE Recipes SET steps = ? WHERE name = ?", (steps, name))
+        cur.execute("UPDATE Recipes SET steps = ? WHERE name = ?", (steps, oldName))
         print("2")
         #cur.execute("UPDATE Recipes SET imgURL = ? WHERE name = ?", (img, name))
         #cur.execute("UPDATE Recipes SET name = ? WHERE name = ?", (img, name))
+        if oldName is not name:
+            cur.execute("UPDATE Recipes SET name = ? WHERE name = ?", (name, oldName))
 
         recipeList = []
         for row in cur.execute("SELECT * FROM Recipes"):
