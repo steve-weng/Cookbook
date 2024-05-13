@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput } from 'react-native';
+import { Dimensions, View, Text, Image, TextInput } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Header from './Header';
 import MyButton from './MyButton';
@@ -8,6 +8,7 @@ const RecipeEdit = ({navigation}) => {
     const route = useRoute(); 
     const recipe = route.params.recipe;
     const oldName = recipe[1];
+    const { width, height } = Dimensions.get('window');
 
     const [name, setName] = useState(recipe[1]);
     const [ingredients, setIngredients] = useState(recipe[2]);
@@ -73,21 +74,21 @@ const RecipeEdit = ({navigation}) => {
               source={{uri:recipe[4]}}/>
         
           <View style={{flexDirection: 'column'}}>
-          <Text style={{fontWeight: 700, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Recipe Name</Text>
+          <Text style={{paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: width * 0.045}}>Recipe Name</Text>
               <TextInput 
                   style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
                   onChangeText={handleNameChange}
                   value={name}
               />
 
-              <Text style={{fontWeight: 700, paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Ingredients</Text>
+              <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: width * 0.045}}>Ingredients</Text>
               <TextInput
                   style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
                   onChangeText={handleIngredientsChange}
                   value={ingredients}
               />
   
-              <Text style={{fontWeight: 700, paddingTop: 10, paddingBottom: 5, fontFamily: "PlayfairDisplay", fontSize: 17}}>Steps</Text>
+              <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: width * 0.045}}>Steps</Text>
               <TextInput
                   style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
                   onChangeText={handleStepsChange}

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Button, StyleSheet, Text, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
+import { Dimensions, View, Image, Button, StyleSheet, Text, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 
 const Recipe = props => {
     const recipe = props.content;
+    const { width, height } = Dimensions.get('window');
 
     const redirectPage = () => {
         navigation.navigate('RecipeView', {recipe});
@@ -15,7 +16,7 @@ const Recipe = props => {
                 <Image 
                     style={{width: 120, height: 120, marginRight: 10}}
         q           source={{uri:recipe[4]}}/>
-                <Text style={styles.buttonText}>{recipe[1]}</Text>
+                <Text style={[styles.buttonText, {fontSize: width * 0.045}]}>{recipe[1]}</Text>
             </View>
             </TouchableOpacity>
         </View>
@@ -31,10 +32,8 @@ const styles = StyleSheet.create({
     },
     buttonText: {
     color: 'black',
-    fontSize: 18, // make this flexible
-    fontWeight: 'bold',
     textAlign: 'center',
-    fontFamily: "Playfair Display",
+    fontFamily: 'PlayfairDisplay_700Bold',
   },
 });
 
