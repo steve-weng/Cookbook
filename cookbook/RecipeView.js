@@ -7,7 +7,21 @@ import MyButton from './MyButton';
 const RecipeView = ({navigation}) => {
     const route = useRoute(); 
     const recipe = route.params.recipe;
-    const {width, height} = Dimensions.get('window')
+    const {width, height} = Dimensions.get('window');
+
+    let titlesize = 0;
+    let headingsize = 0;
+    let size = 0;
+
+    if(width > height) {
+      titlesize = 25;
+      headingsize = 20;
+      size = 15;
+    } else {
+      titlesize = 20;
+      headingsize = 15;
+      size = 10;
+    }
 
     const redirectHome = () => {
         navigation.navigate('Home');
@@ -51,15 +65,15 @@ const RecipeView = ({navigation}) => {
             <Image 
               style={{width: 190, height: 130, marginRight: 20, marginBottom: 30}}
               source={{uri:recipe[4]}}/>
-            <Text style={{paddingBottom: 20, fontFamily: 'PlayfairDisplay_900Black', fontSize: width * 0.06}}>{recipe[1]}</Text>
+            <Text style={{paddingBottom: 20, fontFamily: 'PlayfairDisplay_900Black', fontSize: titlesize}}>{recipe[1]}</Text>
           </View>
 
           <View style={{flexDirection: 'column'}}>
-              <Text style={{paddingBottom: 5, marginRight: 15, fontFamily: 'PlayfairDisplay_700Bold', fontSize: width * 0.05}}>Ingredients:</Text>
-              <Text style={{paddingBottom: 20, fontFamily: "PlayfairDisplay", fontSize: 17}}>{recipe[2]}</Text>
+              <Text style={{paddingBottom: 5, marginRight: 15, fontFamily: 'PlayfairDisplay_700Bold', fontSize: headingsize}}>Ingredients:</Text>
+              <Text style={{paddingBottom: 20, fontFamily: "PlayfairDisplay", fontSize: size}}>{recipe[2]}</Text>
 
-            <Text style={{paddingBottom: 5, marginRight: 15, fontFamily: 'PlayfairDisplayh_700Bold', fontSize: width * 0.05}}>Steps:</Text>
-            <Text style={{paddingBottom: 20, fontFamily: "PlayfairDisplay", fontSize: width * 0.045}}>{recipe[3]}</Text>
+            <Text style={{paddingBottom: 5, marginRight: 15, fontFamily: 'PlayfairDisplay_700Bold', fontSize: headingsize}}>Steps:</Text>
+            <Text style={{paddingBottom: 20, fontFamily: "PlayfairDisplay", fontSize: size}}>{recipe[3]}</Text>
 
             <View style={{alignItems: 'center'}}>
             <MyButton width={200} title="Back" onPressFunction={redirectHome} />

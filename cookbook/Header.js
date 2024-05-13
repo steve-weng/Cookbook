@@ -4,6 +4,13 @@ import { StyleSheet, Image, Text, View, Dimensions } from "react-native"
 
 const Header = () => {
   const { width, height } = Dimensions.get('window');
+  let size = 0;
+
+  if(width > height) {
+    size = 35;
+  } else {
+    size = 25;
+  }
     return (
         <View style={styles.Header}>
           <View style={styles.Group842}>
@@ -13,7 +20,7 @@ const Header = () => {
                 uri: "https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/psfm8uwqwwj-I63%3A60%3B6%3A5?alt=media&token=2a91f219-96c5-4e9c-abfe-ae2366617607",
               }}
             />
-            <Text style={[styles.Cookbook, {fontSize: width * 0.09}]}>Cookbook</Text>
+            <Text style={[styles.Cookbook, {fontSize: size}]}>Cookbook</Text>
           </View>
         </View>
       )

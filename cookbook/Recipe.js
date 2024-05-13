@@ -4,6 +4,12 @@ import { Dimensions, View, Image, Button, StyleSheet, Text, TouchableOpacity, Ke
 const Recipe = props => {
     const recipe = props.content;
     const { width, height } = Dimensions.get('window');
+    let size = 0;
+    if(width > height) {
+        size = 25;
+    } else {
+        size = 20;
+    }
 
     const redirectPage = () => {
         navigation.navigate('RecipeView', {recipe});
@@ -16,7 +22,7 @@ const Recipe = props => {
                 <Image 
                     style={{width: 120, height: 120, marginRight: 10}}
         q           source={{uri:recipe[4]}}/>
-                <Text style={[styles.buttonText, {fontSize: width * 0.045}]}>{recipe[1]}</Text>
+                <Text style={[styles.buttonText, {fontSize: size}]}>{recipe[1]}</Text>
             </View>
             </TouchableOpacity>
         </View>

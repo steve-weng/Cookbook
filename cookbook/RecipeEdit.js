@@ -10,6 +10,14 @@ const RecipeEdit = ({navigation}) => {
     const oldName = recipe[1];
     const { width, height } = Dimensions.get('window');
 
+    let size = 0;
+
+    if(width > height) {
+      size = 20;
+    } else {
+      size = 15;
+    }
+
     const [name, setName] = useState(recipe[1]);
     const [ingredients, setIngredients] = useState(recipe[2]);
     const [steps, setSteps] = useState(recipe[3]);
@@ -74,21 +82,21 @@ const RecipeEdit = ({navigation}) => {
               source={{uri:recipe[4]}}/>
         
           <View style={{flexDirection: 'column'}}>
-          <Text style={{paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: width * 0.045}}>Recipe Name</Text>
+          <Text style={{paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: size}}>Recipe Name</Text>
               <TextInput 
                   style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, marginRight: 20, paddingHorizontal: 10 }}
                   onChangeText={handleNameChange}
                   value={name}
               />
 
-              <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: width * 0.045}}>Ingredients</Text>
+              <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: size}}>Ingredients</Text>
               <TextInput
                   style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
                   onChangeText={handleIngredientsChange}
                   value={ingredients}
               />
   
-              <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: width * 0.045}}>Steps</Text>
+              <Text style={{paddingTop: 10, paddingBottom: 5, fontFamily: 'PlayfairDisplay_700Bold', fontSize: size}}>Steps</Text>
               <TextInput
                   style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingright: 50, paddingBottom: 50, paddingTop: 15, paddingLeft: 15 }}
                   onChangeText={handleStepsChange}

@@ -8,6 +8,13 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const { width, height } = Dimensions.get('window');
+  let welcomesize = 0;
+
+  if(width > height) {
+    welcomesize = 40;
+  } else {
+    welcomesize = 25;
+  }
 
   const handleLogin = () => {
     // login code here
@@ -52,7 +59,7 @@ const Login = ({ navigation }) => {
       <View style={styles.header}>
         <Header />
       </View>
-      <Text style={[styles.welcomeText, {fontSize: width * 0.09}]}>Welcome!</Text>
+      <Text style={[styles.welcomeText, {fontSize: welcomesize}]}>Welcome!</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"

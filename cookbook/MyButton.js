@@ -4,10 +4,17 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 const MyButton = props => {
     const length = props.title.length;
     const { width, height } = Dimensions.get('window');
+    let size = 0;
+
+    if(width > height) {
+        size = 20;
+    } else {
+        size = 10;
+    }
 
     return (
         <TouchableOpacity style={[styles.button, {width: props.width}]} onPress={props.onPressFunction}>
-            <Text style={[styles.buttonText, {fontSize: width * 0.045}]}>{props.title}</Text>
+            <Text style={[styles.buttonText, {fontSize: size}]}>{props.title}</Text>
         </TouchableOpacity>
     );
 };

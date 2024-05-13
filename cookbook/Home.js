@@ -59,7 +59,7 @@ const Home = ({ navigation }) => {
       <View style={{flexDirection: 'row'}}>
 
       <View style={{paddingBottom: 12, paddingRight: 12}}>
-        <MyButton title="Add recipe" width={100} onPressFunction={redirectAdd} />
+        <MyButton title="Add" width={100} onPressFunction={redirectAdd} />
       </View>
       
       <View style={{paddingBottom: 12, paddingLeft: 12}}>
