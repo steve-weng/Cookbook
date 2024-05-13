@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Dimensions } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Header from './Header';
 import MyButton from './MyButton';

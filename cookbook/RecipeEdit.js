@@ -34,7 +34,6 @@ const RecipeEdit = ({navigation}) => {
     const handleSubmit = () => {
         //updates database
         var formData = new FormData();
-        formData.append("oldRecipeName", oldName) // might be the same as name, doesn't matter
         formData.append("recipeName", name);
         formData.append("ingredients", ingredients);
         formData.append("steps", steps);
@@ -52,7 +51,7 @@ const RecipeEdit = ({navigation}) => {
     
         if(data.success) {
           console.log(data);
-          navigate.navigation('Home');
+          navigation.navigate('Home');
         }
          
         });
